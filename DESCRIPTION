@@ -1,0 +1,20 @@
+Package: biker
+Type: Package
+Title: Functions for getting data from bike sharing systems
+Version: 0.0.9000
+Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman[at]gmail[dot]com",
+  role = c("aut", "cre"))
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    httr,
+    jsonlite,
+    @importFrom magrittr %>%,
+    purrr,
+    tibble
+Suggests: 
+    testthat
