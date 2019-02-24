@@ -2,25 +2,42 @@
 % Please edit documentation in R/get_api_data.R
 \name{get_api_data}
 \alias{get_api_data}
-\title{Get realtime data from City Bike API}
+\title{Get realtime data from the Oslo City Bike API}
 \usage{
-
+get_api_data(client_id, data, returnOriginal = FALSE)
 }
 \arguments{
-\item{client_id}{A character string that is the client identification to access the API.}
+\item{client_id}{A \code{character} string that is the client identification to access the API.}
 
-\item{data}{A character string that informs the function that you want to retrieve
+\item{data}{A \code{character} string that informs the function that you want to retrieve
 \code{"availability"} or \code{"stations"} data.}
 
-\item{returnOriginal}{Optional. A logical argument that specifies if you want to retrieve
-the original \code{GET} request instead of a dataframe.
-Defaults to \code{FALSE}.}
+\item{return_df}{A logical argument that specifies whether you want the function
+to return a \code{tibble} (i.e. \code{dataframe}) of the data retrieved from
+the \code{GET} request. If set to \code{FALSE}, the function returns the processed
+\code{GET} request as a \code{list}. Defaults to \code{TRUE}.}
 }
 \value{
-Returns a dataframe if \code{returnOriginal = FALSE}
-and a list if \code{returnOriginal = TRUE}
+Returns a \code{tibble} (i.e. \code{dataframe}) if \code{return_df = TRUE}. Returns a
+a \code{list} if \code{return_df = FALSE}.
 }
 \description{
-\code{get_api_data} gets realtime data from the
-City Bike API for Oslo, Bergen or Trondheim in Norway.
+\code{get_api_data} gets realtime data on bike availability or
+bike stations from the Oslo City Bike API. Please read the
+API documentation on the
+\href{https://developer.oslobysykkel.no/}{Oslo City Bike developer website}.
+The data is distributed under the
+\href{https://data.norge.no/nlod/en/2.0}{Norwegian License for Open Government Data 2.0 (NLOD 2.0)}.
+}
+\examples{
+# Get data on bike "availability"
+get_api_data(client_id = "1234abcd", data = "availability")
+
+# Get data on bike "availability", but return the GET result
+get_api_data(client_id = "1234abcd", data = "availability",
+             return_df = TRUE)
+
+# Get data on bike "stations"
+get_api_data(client_id = "1234abcd", data = "stations")
+
 }
