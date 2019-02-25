@@ -21,9 +21,7 @@ get_api_data_oslo <- function(client_id, data, return_df = TRUE) {
       return(avail_result)
     }
 
-    avail_data <-
-      avail_result %>%
-      purrr::pluck("stations")
+    avail_data <- avail_result$stations
 
     avail_df <-
       tibble(id                = avail_data$id,

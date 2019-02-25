@@ -8,9 +8,9 @@ get_trips_data_bergen <- function(year, month) {
             is.numeric(year),
             is.numeric(month))
 
-  base_url <- "http://data.urbansharing.com/bergenbysykkel.no/trips/v1/"
+  base_url <- "http://data.urbansharing.com/bergenbysykkel.no/trips/v1"
 
-  dl_url <- glue::glue("{base_url}{year}/{sprintf('%0.2d', month)}.csv")
+  dl_url <- glue::glue("{base_url}/{year}/{sprintf('%0.2d', month)}.csv")
   download.file(url = dl_url, destfile = glue::glue("trips_bergen_{year}_{sprintf('%0.2d', month)}.csv"))
 
 }
