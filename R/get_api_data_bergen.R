@@ -22,23 +22,23 @@ get_api_data_bergen <- function(client_id, data, return_df = FALSE) {
       httr::content("text") %>%
       jsonlite::fromJSON()
 
+    avail_df <-
+      avail_result$data$stations %>%
+      dplyr::mutate(last_reported = as.POSIXct(last_reported,
+                                               origin = "1970-01-01",
+                                               tz = "Europe/Oslo")) %>%
+      tibble::as_tibble()
+
     # Need an "if" statement to return only a dataframe
     # if the `return_df` argument is set to TRUE.
     if (return_df) {
-      avail_df <-
-        avail_result$data$stations %>%
-        dplyr::mutate(last_reported = as.POSIXct(last_reported,
-                                          origin = "1970-01-01",
-                                          tz = "Europe/Oslo"))
       return(avail_df)
     }
 
     # Need a section that returns a list if the `return_df`
     # argument is set to FALSE.
-    avail_data <- list(availability_df = avail_result$data$stations,
-                       last_updated    = as.POSIXct(avail_result$last_updated,
-                                                    origin = "1970-01-01",
-                                                    tz = Sys.timezone()))
+    avail_data <- list(availability_df = avail_df,
+                       last_updated    = avail_result$last_updated)
 
     return(avail_data)
 
@@ -54,21 +54,18 @@ get_api_data_bergen <- function(client_id, data, return_df = FALSE) {
       httr::content("text") %>%
       jsonlite::fromJSON()
 
+    stations_df <- tibble::as_tibble(stations_result$data$stations)
+
     # Need an "if" statement to return only a dataframe
     # if the `return_df` argument is set to TRUE.
     if (return_df) {
-      stations_df <- stations_result$data$stations
       return(stations_df)
     }
 
     # Need a section that returns a list if the `return_df`
     # argument is set to FALSE.
-    stations_last_updated <- stations_result$last_updated
-    stations_df <- stations_result$data$stations
     stations_data <- list(stations_df = stations_df,
-                         last_updated = as.POSIXct(stations_last_updated,
-                                                   origin = "1970-01-01",
-                                                   tz = Sys.timezone()))
+                         last_updated = stations_result$last_updated)
 
     return(stations_data)
 

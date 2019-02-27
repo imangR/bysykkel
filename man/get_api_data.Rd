@@ -2,15 +2,18 @@
 % Please edit documentation in R/get_api_data.R
 \name{get_api_data}
 \alias{get_api_data}
-\title{Get realtime data from the Oslo City Bike API}
+\title{Download realtime data from the City Bike APIs in Norway}
 \usage{
-get_api_data(client_id, data, returnOriginal = FALSE)
+get_api_data(client_id, data, return_df = FALSE)
 }
 \arguments{
 \item{client_id}{A \code{character} string that is the client identification to access the API.}
 
-\item{data}{A \code{character} string that informs the function that you want to retrieve
+\item{data}{A character string that informs the function that you want to retrieve
 \code{"availability"} or \code{"stations"} data.}
+
+\item{city}{A character string that specifies whether you want to retrieve realtime data
+for \code{"Oslo"}, \code{"Bergen"}, or \code{"Trondheim"}.}
 
 \item{return_df}{A logical argument that specifies whether you want the function
 to return a \code{tibble} (i.e. \code{dataframe}) of the data retrieved from
@@ -22,12 +25,16 @@ Returns a \code{tibble} (i.e. \code{dataframe}) if \code{return_df = TRUE}. Retu
 a \code{list} if \code{return_df = FALSE}.
 }
 \description{
-\code{get_api_data} gets realtime data on bike availability or
-bike stations from the Oslo City Bike API. Please read the
-API documentation on the
-\href{https://developer.oslobysykkel.no/}{Oslo City Bike developer website}.
-The data is distributed under the
-\href{https://data.norge.no/nlod/en/2.0}{Norwegian License for Open Government Data 2.0 (NLOD 2.0)}.
+\code{get_api_data} downloads realtime data on bike availability and
+bike stations from the API for
+\href{https://developer.oslobysykkel.no/}{Oslo City Bike},
+\href{https://bergenbysykkel.no/apne-data/sanntid}{Bergen City Bike}, and
+\href{https://trondheimbysykkel.no/apne-data/sanntid}{Trondheim City Bike}.
+Please read the API documentation for each City
+Bike API before using this function.
+
+The data is provided according to the
+\href{https://data.norge.no/nlod/en/2.0}{Norwegian License for Open Government Data (NLOD) 2.0}.
 }
 \examples{
 # Get data on bike "availability"
