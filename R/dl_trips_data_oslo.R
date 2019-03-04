@@ -1,12 +1,9 @@
-get_trips_data_oslo <- function(year, month) {
+dl_trips_data_oslo <- function(year, month) {
 
   min_year <- 2016
   max_year <- 2018
 
-  stopifnot(year  %in% c(min_year:max_year),
-            month %in% c(1:12),
-            is.numeric(year),
-            is.numeric(month))
+  stopifnot(year %in% c(min_year:max_year))
 
   days31 <- c(1, 3, 5, 7, 8, 10, 12)
   days30 <- c(4, 6, 9, 11)

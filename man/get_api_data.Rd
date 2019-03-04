@@ -2,49 +2,60 @@
 % Please edit documentation in R/get_api_data.R
 \name{get_api_data}
 \alias{get_api_data}
-\title{Download realtime data from the City Bike APIs in Norway}
+\title{Get realtime bike data from the City Bike APIs in Norway}
 \usage{
-get_api_data(client_id, data, return_df = FALSE)
+get_api_data(client_id, data, city, return_df = FALSE)
 }
 \arguments{
-\item{client_id}{A \code{character} string that is the client identification to access the API.}
+\item{client_id}{A character string that contains a client identifier to access the API.
+Please visit the City Bike's website to learn more about how to use
+\code{client_id} to access the API.}
 
 \item{data}{A character string that informs the function that you want to retrieve
 \code{"availability"} or \code{"stations"} data.}
 
-\item{city}{A character string that specifies whether you want to retrieve realtime data
-for \code{"Oslo"}, \code{"Bergen"}, or \code{"Trondheim"}.}
+\item{city}{A character string that informs the function whether you want to retrieve
+realtime data for \code{"Oslo"}, \code{"OsloW"} (for winter bike data in
+Oslo, \code{"Bergen"}, or \code{"Trondheim"}.}
 
 \item{return_df}{A logical argument that specifies whether you want the function
-to return a \code{tibble} (i.e. \code{dataframe}) of the data retrieved from
-the \code{GET} request. If set to \code{FALSE}, the function returns the processed
-\code{GET} request as a \code{list}. Defaults to \code{TRUE}.}
+to return a \code{tibble} that contains the "main" data
+from the GET request. Defaults to \code{FALSE}.}
 }
 \value{
-Returns a \code{tibble} (i.e. \code{dataframe}) if \code{return_df = TRUE}. Returns a
-a \code{list} if \code{return_df = FALSE}.
+If \code{return_df = FALSE}, then the function returns a \code{list} that
+contains two elements: a dataframe with the
+"main" data, and the datetime (POSIX) for the API request. If
+\code{return_df = FALSE}, then the function returns a \code{tibble}
+(i.e. a dataframe) if \code{return_df = TRUE}.
 }
 \description{
-\code{get_api_data} downloads realtime data on bike availability and
+\code{get_api_data} gets realtime data on bike availability and
 bike stations from the API for
 \href{https://developer.oslobysykkel.no/}{Oslo City Bike},
 \href{https://bergenbysykkel.no/apne-data/sanntid}{Bergen City Bike}, and
 \href{https://trondheimbysykkel.no/apne-data/sanntid}{Trondheim City Bike}.
-Please read the API documentation for each City
-Bike API before using this function.
+Please read the API documentation for each City Bike API before using
+this function.
 
-The data is provided according to the
-\href{https://data.norge.no/nlod/en/2.0}{Norwegian License for Open Government Data (NLOD) 2.0}.
+The data is provided according to the Norwegian License for Open Government
+Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
 }
 \examples{
 # Get data on bike "availability"
-get_api_data(client_id = "1234abcd", data = "availability")
+oslo_api_data <- get_api_data(client_id = "registered_client_id",
+                              data = "availability",
+                              city = "Oslo")
 
-# Get data on bike "availability", but return the GET result
-get_api_data(client_id = "1234abcd", data = "availability",
-             return_df = TRUE)
+# Get winter data on bike "availability"
+oslo_winter_bike <- get_api_data(client_id = "myname-myapp",
+                                 data = "availability",
+                                 city = "OsloW")
 
-# Get data on bike "stations"
-get_api_data(client_id = "1234abcd", data = "stations")
+# Get data on bike "availability", but return a tibble
+bergen_stations <- get_api_data(client_id = "mycompany-myservice",
+                                    data = "stations",
+                                    city = "Bergen",
+                                    return_df = TRUE)
 
 }

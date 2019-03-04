@@ -1,12 +1,5 @@
 get_api_data_bergen <- function(client_id, data, return_df = FALSE) {
 
-  # Argument control --------------------------------------------------------
-
-  # Need to check that function arguments are valid
-  stopifnot(is.character(client_id),
-            is.logical(return_df),
-            data %in% c("availability", "stations"))
-
   # Set base URL
   base_url <- "http://gbfs.urbansharing.com/bergenbysykkel.no"
 
@@ -22,12 +15,11 @@ get_api_data_bergen <- function(client_id, data, return_df = FALSE) {
       httr::content("text") %>%
       jsonlite::fromJSON()
 
-    avail_df <-
-      avail_result$data$stations %>%
-      dplyr::mutate(last_reported = as.POSIXct(last_reported,
+    avail_df <- avail_result$data$stations
+    avail_df[, "last_reported"] <-  as.POSIXct(avail_df$last_reported,
                                                origin = "1970-01-01",
-                                               tz = "Europe/Oslo")) %>%
-      tibble::as_tibble()
+                                               tz = "Europe/Oslo")
+    avail_df <- tibble::as_tibble(avail_df)
 
     # Need an "if" statement to return only a dataframe
     # if the `return_df` argument is set to TRUE.

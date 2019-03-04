@@ -1,7 +1,7 @@
-get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
+get_api_data_oslow <- function(client_id, data, return_df = FALSE) {
 
   # Set base URL
-  base_url <- "http://gbfs.urbansharing.com/trondheimbysykkel.no"
+  base_url <- "http://gbfs.urbansharing.com/oslovintersykkel.no"
 
   # Availability ------------------------------------------------------------
 
@@ -16,7 +16,7 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
       jsonlite::fromJSON()
 
     avail_df <- avail_result$data$stations
-    avail_df[, "last_reported"] <- as.POSIXct(avail_df$last_reported,
+    avail_df[, "last_reported"] <-  as.POSIXct(avail_df$last_reported,
                                                origin = "1970-01-01",
                                                tz = "Europe/Oslo")
     avail_df <- tibble::as_tibble(avail_df)
@@ -56,7 +56,7 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
 
     # Need a section that returns a list if the `return_df`
     # argument is set to FALSE.
-    stations_data <- list(stations_df  = stations_df,
+    stations_data <- list(stations_df = stations_df,
                           last_updated = stations_result$last_updated)
 
     return(stations_data)

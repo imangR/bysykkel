@@ -1,12 +1,9 @@
-get_trips_data_bergen <- function(year, month) {
+dl_trips_data_bergen <- function(year, month) {
 
   min_year <- 2018
   max_year <- 2019
 
-  stopifnot(year  %in% c(min_year:max_year),
-            month %in% c(1:12),
-            is.numeric(year),
-            is.numeric(month))
+  stopifnot(year %in% c(min_year:max_year))
 
   base_url <- "http://data.urbansharing.com/bergenbysykkel.no/trips/v1"
 

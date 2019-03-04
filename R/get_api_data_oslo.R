@@ -1,12 +1,5 @@
 get_api_data_oslo <- function(client_id, data, return_df = FALSE) {
 
-  # Argument control --------------------------------------------------------
-
-  # Need to check that function arguments are valid
-  stopifnot(is.character(client_id),
-            is.logical(return_df),
-            data %in% c("availability", "stations"))
-
   # Availability ------------------------------------------------------------
 
   if (data == "availability") { # Get 'Availability'

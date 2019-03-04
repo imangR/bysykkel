@@ -1,9 +1,9 @@
 Package: bysykkel
 Type: Package
-Title: Functions to get data on the use of city bikes in Norway
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-Version: 0.0.0.9000
+Title: Functions to get, download, and read in city bike data in Norway
+Description: Functions for simplifying the process of getting, downloading,
+    and reading in open city bike data provided on the City Bike websites in Norway.
+Version: 0.0.1.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
 URL: http://github.com/PersianCatsLikeToMeow/biker
@@ -16,8 +16,5 @@ Imports:
     httr,
     jsonlite,
     magrittr,
-    purrr,
     tibble
-Suggests: 
-    testthat
 RoxygenNote: 6.1.1
