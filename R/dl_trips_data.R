@@ -31,6 +31,7 @@
 #' The function downloads a CSV-file to your current working directory.
 #'
 #' @examples
+#' \dontrun{
 #' # Download bike trips data for the month of January, 2019, in Bergen
 #' dl_trips_data(2019, 01, "Bergen")
 #'
@@ -39,6 +40,7 @@
 #'
 #' # Use "lapply" to get bike trips data for several months in Oslo
 #' lapply(06:12, dl_trips_data, year = 2018, city = "Oslo")
+#'}
 #'
 #' @importFrom magrittr %>%
 #' @importFrom glue glue

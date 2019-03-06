@@ -42,6 +42,7 @@ The data is provided according to the Norwegian License for Open Government
 Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
 }
 \examples{
+\dontrun{
 # Get data on bike "availability"
 oslo_api_data <- get_api_data(client_id = "registered_client_id",
                               data = "availability",
@@ -57,5 +58,6 @@ bergen_stations <- get_api_data(client_id = "mycompany-myservice",
                                     data = "stations",
                                     city = "Bergen",
                                     return_df = TRUE)
+}
 
 }

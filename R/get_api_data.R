@@ -42,6 +42,7 @@
 #' (i.e. a dataframe) if \code{return_df = TRUE}.
 #'
 #' @examples
+#' \dontrun{
 #' # Get data on bike "availability"
 #' oslo_api_data <- get_api_data(client_id = "registered_client_id",
 #'                               data = "availability",
@@ -57,6 +58,7 @@
 #'                                     data = "stations",
 #'                                     city = "Bergen",
 #'                                     return_df = TRUE)
+#'}
 #'
 #' @importFrom magrittr %>%
 #' @importFrom tibble tibble

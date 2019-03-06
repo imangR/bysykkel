@@ -32,6 +32,7 @@ The data is provided according to the Norwegian License for Open Government
 Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
 }
 \examples{
+\dontrun{
 # Download bike trips data for the month of January, 2019, in Bergen
 dl_trips_data(2019, 01, "Bergen")
 
@@ -40,5 +41,6 @@ dl_trips_data(2018, 10, "Trondheim")
 
 # Use "lapply" to get bike trips data for several months in Oslo
 lapply(06:12, dl_trips_data, year = 2018, city = "Oslo")
+}
 
 }
