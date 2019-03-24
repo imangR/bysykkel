@@ -49,7 +49,7 @@
 
 dl_trips_data <- function(year, month, city) {
 
-  print(glue("Downloading data for {year}-{sprintf('%0.2d', month)} for the city of {city}."))
+  glue::glue("Downloading data for {year}-{sprintf('%0.2d', month)} for the city of {city}.")
 
   stopifnot(is.character(city),
             is.numeric(month),
