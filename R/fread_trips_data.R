@@ -56,7 +56,7 @@
 
 fread_trips_data <- function(year, month, city) {
 
-  print(glue("Getting data for {year}-{sprintf('%0.2d', month)} for the city of {city}."))
+  glue::glue("Getting data for {year}-{sprintf('%0.2d', month)} for the city of {city}.")
 
   # Argument control --------------------------------------------------------
 
