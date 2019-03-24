@@ -1,6 +1,6 @@
 # bysykkel
 
-The goal of bysykkel is to ...
+More information coming soon...
 
 ## Installation
 
@@ -12,9 +12,5 @@ install.packages("bysykkel")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
-```
+More examples coming soon...
 
