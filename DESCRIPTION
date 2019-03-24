@@ -3,11 +3,11 @@ Type: Package
 Title: Functions to get, download, and read in city bike data in Norway
 Description: Functions for simplifying the process of getting, downloading,
     and reading in open city bike data provided on the City Bike websites in Norway.
-Version: 0.0.1.0
+Version: 0.1.0.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
-URL: http://github.com/PersianCatsLikeToMeow/biker
-BugReports: http://github.com/PersianCatsLikeToMeow/biker/issues
+URL: http://github.com/PersianCatsLikeToMeow/bysykkel
+BugReports: http://github.com/PersianCatsLikeToMeow/bysykkel/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
