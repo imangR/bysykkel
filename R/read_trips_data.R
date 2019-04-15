@@ -12,7 +12,7 @@
 #'
 #' To get trip records for winter bikes in each city, add a capital "W" at
 #' the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
-#' bikes are currently available for Oslo only at the time of writing
+#' bikes are currently only available for Oslo at the time of writing
 #' (2019-03-04).
 #'
 #' The data is provided according to the Norwegian License for Open Government
@@ -39,41 +39,53 @@
 #'
 #' @examples
 #' \dontrun{
+#'
 #' # Read bike trips data for the month of January 2019 in Bergen
 #' bergen_trips <- read_trips_data(2019, 1, "Bergen")
 #'
 #' # Read bike trips data for the month of October 2018 in Trondheim
 #' trondheim_trips <- read_trips_data(2018, 10, "Trondheim")
 #'
-#' # Use "lapply" to read bike trips data for several months in Oslo
+#' # Use "lapply()" to read bike trips data for several months in Oslo
 #' oslo_winter_trips <- lapply(01:02, read_trips_data, year = 2019, city = "OsloW")
+#'
+#' # Use "rbind()" to bind each element of the list "oslo_winter_trips" to
+#' # to a dataframe
+#' oslo_winter_trips <- do.call(rbind, oslo_winter_trips)
+#'
 #'}
 #'
 #' @importFrom glue glue
-#' @importFrom utils read.csv
+#' @importFrom tibble as_tibble
+#' @importFrom httr http_error
+#' @importFrom lubridate month
+#' @importFrom lubridate year
 #' @export read_trips_data
 
 read_trips_data <- function(year, month, city) {
 
-  print(glue("Reading data for {year}-{sprintf('%0.2d', month)} for the city of {city}."))
+# Control input arguments -------------------------------------------------
 
-# Argument control --------------------------------------------------------
+  bysykkel_control_input(year, month, city)
 
-  stopifnot(is.character(city),
-            is.numeric(month),
-            city %in% c("OsloW", "Bergen", "Trondheim"),
-            month %in% c(1:12))
+  bysykkel_control_date(year, month, city)
+
+  print(glue::glue("Getting bike data for ",
+                   "{lubridate::month(month, label = TRUE, abbr = FALSE)}, ",
+                   "{year} for {city}."))
 
 # Control structure -------------------------------------------------------
 
-  if (city == "OsloW") {
+  if (city == "Oslo") {
+    read_trips_data_oslo(year, month)
+  } else if (city == "OsloW") {
     read_trips_data_oslow(year, month)
   } else if (city == "Bergen") {
     read_trips_data_bergen(year, month)
   } else if (city == "Trondheim") {
     read_trips_data_trondheim(year, month)
   } else {
-    warning("Please choose a valid argument for `city`.")
+    warning("Something went wrong.")
   }
 
 }

@@ -1,35 +1,34 @@
 dl_trips_data_oslo <- function(year, month) {
 
-  min_year <- 2016
-  max_year <- 2018
+  if (year >= 2019) {
 
-  stopifnot(year %in% c(min_year:max_year))
+    base_url <- "http://data.urbansharing.com/oslobysykkel.no/trips/v1"
+    dl_url <- glue::glue("{base_url}/{year}/{sprintf('%0.2d', month)}.csv")
 
-  days31 <- c(1, 3, 5, 7, 8, 10, 12)
-  days30 <- c(4, 6, 9, 11)
-  days28 <- 2
+    if (httr::http_error(dl_url)) {
 
-  base_url <- "http://oslo-city-bike-web.s3.amazonaws.com/exports/"
+      stop("The download URL is invalid.")
 
-  if (month %in% days31) {
+    }
 
-    dl_url <- glue::glue("{base_url}trips-{year}.{month}.1-{year}.{month}.31.csv.zip")
-    download.file(url = dl_url, destfile = glue::glue("trips_oslo_{year}_{sprintf('%0.2d', month)}.zip"))
+    download.file(url = dl_url)
 
-  } else if (month %in% days30) {
+  } else if (year < 2019) {
 
-    dl_url <- glue::glue("{base_url}trips-{year}.{month}.1-{year}.{month}.30.csv.zip")
-    download.file(url = dl_url, destfile = glue::glue("trips_oslo_{year}_{sprintf('%0.2d', month)}.zip"))
+    base_url <- "https://data-legacy.urbansharing.com/oslobysykkel.no"
+    dl_url <- glue::glue("{base_url}/{year}/{sprintf('%0.2d', month)}.csv.zip")
 
-  } else if (month %in% days28) {
+    if (httr::http_error(dl_url)) {
 
-    dl_url <- glue::glue("{base_url}trips-{year}.{month}.1-{year}.{month}.28.csv.zip")
-    download.file(url = dl_url, destfile = glue::glue("trips_oslo_{year}_{sprintf('%0.2d', month)}.zip"))
+      stop("The download URL is invalid.")
 
-  } else {
+    }
 
-    error <- glue::glue("Please select a valid month number (1, 2, ..., 12) or a valid year (2016, 2017, 2018).")
-    print(error)
+    temp <- tempfile()
+    download.file(url = dl_url, temp)
+    filename <- bysykkel_control_legacy_oslo(year, month)
+    unzip(temp, exdir = getwd(), overwrite = TRUE)
+    unlink(temp)
 
   }
 

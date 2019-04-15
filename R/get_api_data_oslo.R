@@ -1,56 +1,97 @@
 get_api_data_oslo <- function(client_id, data, return_df = FALSE) {
 
+  # Set base URL
+  base_url <- "https://gbfs.urbansharing.com/oslobysykkel.no"
+
   # Availability ------------------------------------------------------------
 
   if (data == "availability") { # Get 'Availability'
 
-    avail_request <-
-      httr::GET("https://oslobysykkel.no/api/v1/stations/availability",
-                httr::add_headers("Client-Identifier" = client_id))
+    endpoint <- "station_status.json"
 
-    avail_last_updated <- as.numeric(avail_request$date)
+    avail_get <- httr::GET(glue::glue("{base_url}/{endpoint}"),
+                           httr::add_headers("Client-Identifier" = client_id))
 
-    avail_result <-
-      avail_request %>%
-      httr::content("text") %>%
-      jsonlite::fromJSON()
+    avail_content <- httr::content(avail_get, "text", encoding = "UTF-8")
 
-    avail_df <- tibble::as_tibble(avail_result$stations)
+    avail_result <- jsonlite::fromJSON(avail_content)
 
+    avail_df <- avail_result$data$stations
+
+    avail_df[, "last_reported"] <-  as.POSIXct(avail_df$last_reported,
+                                               origin = "1970-01-01",
+                                               tz = "Europe/Oslo")
+
+    avail_df <- tibble::as_tibble(avail_df)
+
+    # A control that returns only a dataframe
+    # if the `return_df` argument is set to TRUE.
     if (return_df) {
       return(avail_df)
     }
 
+    # Return a list if the `return_df` argument is set to FALSE.
     avail_data <- list(availability_df = avail_df,
-                       last_updated    = avail_last_updated)
+                       last_updated    = avail_result$last_updated)
 
     return(avail_data)
 
-  # Stations ----------------------------------------------------------------
+    # Stations ----------------------------------------------------------------
 
   } else if (data == "stations") { # Get 'Stations'
 
-    stations_request <-
-      httr::GET("https://oslobysykkel.no/api/v1/stations",
-          httr::add_headers("Client-Identifier" = client_id))
+    endpoint <- "station_information.json"
 
-    stations_last_updated <- as.numeric(stations_request$date)
+    stations_get <-
+      httr::GET(glue::glue("{base_url}/{endpoint}"),
+                httr::add_headers("Client-Identifier" = client_id))
 
-    stations_result <-
-      stations_request %>%
-      httr::content("text") %>%
-      jsonlite::fromJSON()
+    stations_content <- httr::content(stations_get, "text", encoding = "UTF-8")
 
-    stations_df <- tibble::as_tibble(stations_result$stations)
+    stations_result <- jsonlite::fromJSON(stations_content)
 
+    stations_df <- tibble::as_tibble(stations_result$data$stations)
+
+    # A control that returns only a dataframe
+    # if the `return_df` argument is set to TRUE.
     if (return_df) {
       return(stations_df)
     }
 
-    stations_data <- list(stations_df  = stations_df,
-                          last_updated = stations_last_updated)
+    # Return a list if the `return_df` argument is set to FALSE.
+    stations_data <- list(stations_df = stations_df,
+                          last_updated = stations_result$last_updated)
 
     return(stations_data)
 
+  } else if (data == "system") { # Get 'System'
+
+    endpoint <- "system_information.json"
+
+    system_get <-
+      httr::GET(glue::glue("{base_url}/{endpoint}"),
+                httr::add_headers("Client-Identifier" = client_id))
+
+    system_content <- httr::content(system_get, "text", encoding = "UTF-8")
+
+    system_result <- jsonlite::fromJSON(system_content)
+
+    system_df <- tibble::as_tibble(system_result$data)
+
+    # A control that returns only a dataframe
+    # if the `return_df` argument is set to TRUE.
+    if (return_df) {
+      return(system_df)
+    }
+
+    # Return a list if the `return_df` argument is set to FALSE.
+    system_data <- list(system_df = system_df,
+                        last_updated = system_result$last_updated)
+
+  } else {
+
+    warning("Something went wrong.")
+
   }
+
 }
