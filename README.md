@@ -17,7 +17,7 @@ working directory.
 
   - `read_trips_data()` reads bike trip data to R as a dataframe.
   - `fread_trips_data()` fast reads bike trip data to R as a dataframe
-    by utilizing `fread()` from the data.table package.
+    by utilizing `fread()` from data.table.
   - `dl_trips_data()` downloads bike trip data to your working directory
     as a CSV-file.
   - `get_api_data()` gets realtime data from the city bike API service.
@@ -43,9 +43,9 @@ install.packages("bysykkel")
 ### Development version
 
 Alternatively, you can install a development version of bysykkel from
-GitHub to get bug fixes or new features before the package is released
-on CRAN. To install the development version, you can use devtools to
-install bysykkel from GitHub.
+GitHub to get bug fixes or new features before the next package version
+is released on CRAN. To install the development version, you can use
+devtools to install bysykkel from GitHub.
 
 ``` r
 # install.packages("devtools")
@@ -97,15 +97,15 @@ oslo.bike <- read_trips_data(year = 2019, month = 04, city = "Oslo")
 oslo.winter.bike <- read_trips_data(2019, 1, "OsloW")
 
 # Fast read bike data from June to August in 2018 for Bergen with `lapply()`,
-# and `rbind()` the resulting `list` with `do.call()`
+# and `rbind()` the resulting `list` with `do.call()` to get a dataframe
 
 #! install.packages("data.table")
 
 bergen.bike <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
 bergen.bike <- do.call(rbind, bergen.bike)
 
-# Use `map_dfr()` from `purrr` instead of `lapply()` and `rbind()`
-# to achieve the same purpose
+# Alternatively, use `map_dfr()` from `purrr` instead of `lapply()`,
+# `rbind()`, and `do.call() to get the same result: a dataframe
 
 #! install.packages("purrr")
 
@@ -132,7 +132,7 @@ dl_trips_data(2019, 04, "Trondheim")
 
 # Download bike trip data for summer 2018 for Oslo
 lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
-#> The CSV-files are downloaded to your R session's working directory
+#> The CSV-file for each month is downloaded to your R session's working directory
 ```
 
 ### Get realtime data from the API service
@@ -140,6 +140,11 @@ lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
 **NB\!** Please read each City Bike’s guide on how to correctly use
 their API service before using `get_api_data()`. See [Oslo City Bike’s
 guide](https://oslobysykkel.no/en/open-data/realtime) as an example.
+
+The `return_df` argument in `get_api_data()` specifies whether you want
+to return the result as a list. If `return_df = FALSE`, then the
+function returns a list that contains a dataframe, and a number that
+represents the (POSIX) time of when you made the API request.
 
 ``` r
 library(bysykkel)
@@ -149,8 +154,8 @@ oslo.stations <- get_api_data(client_id = "myname-myname",
                               data = "stations",
                               return_df = TRUE)
 
-# Get API data for bike availability as a list, which also contains data
-# on the (POSIX) time you made the API request
+# Get API data for bike availability as a list that contains a dataframe, and
+# a number that represents the (POSIX) time of when you made the API request
 bergen.availability <- get_api_data(client_id = "mycompany-myservice",
                                     data = "availability",
                                     return_df = FALSE)
@@ -161,15 +166,16 @@ trondheim.system.information <- get_api_data("myname-myservice",
                                              return_df = FALSE)
 ```
 
-## File an issue
+## File an issue or suggest an improvement
 
-If you want to report a discovered bug or raise some other issue with
-bysykkel, then please file an issue on
+If you want to report a discovered bug, raise some other issue, or
+suggest an improvement to bysykkel, then please file an issue on
 [GitHub](https://github.com/PersianCatsLikeToMeow/bysykkel/issues). For
 bugs, please file a minimal reproducible example.
 
 -----
 
-1.  There are more bike services in Norway, but as of the time of
-    writing, they do not make their bike data publicly available. These
-    bike services are (1) ;(2)
+1.  Bike data for [Bærum City
+    Bike](https://www.baerum.kommune.no/tjenester/vei-trafikk-og-parkering/sykkel-i-barum/bysykkel/)
+    (unavailable in English) and [Oslo Cargo
+    Bike](https://oslolastesykkel.no/en) is not publicly available.
