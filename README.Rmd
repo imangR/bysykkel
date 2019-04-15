@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
-# bysykkel <img src='https://res.cloudinary.com/climb/image/upload/c_fill,f_auto,h_800,q_80/v1498809170/ximadvmr9aolkqkaqgmf' align="right" height="100" />
+# bysykkel 
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/bysykkel)](https://cran.r-project.org/package=bysykkel)
@@ -89,25 +89,22 @@ abbreviated as NLOD 2.0, which you can read about
 
 ### Read bike trips data to R
 
-```{r, message = FALSE}
+```{r, eval = FALSE, message = FALSE}
 library(bysykkel)
 
-# Read bike data for April, 2019 for Oslo
+# Get bike trip data for April, 2019 for Oslo as a dataframe
 oslo.bike <- read_trips_data(year = 2019, month = 04, city = "Oslo")
 
-# Read winter bike data for January, 2019 for Oslo
+# Get winter bike data for January, 2019 for Oslo as a dataframe
 oslo.winter.bike <- read_trips_data(2019, 1, "OsloW")
 
-# Fast read bike data from June to December in 2018 for Bergen
+# Fast read bike data from June to August in 2018 for Bergen with `lapply()`,
+# and `rbind()` the resulting `list` with `do.call()`
 
 #! install.packages("data.table")
 
-library(data.table)
-
-bergen.bike.data <- lapply(06:12, fread_trips_data, 2019, "Bergen")
-bergen.bike.data <- do.call(rbind, bergen.bike.data)
-
-head(bergen.bike.data)
+bergen.bike <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
+bergen.bike <- do.call(rbind, bergen.bike)
 
 # Use `map_dfr()` from `purrr` instead of `lapply()` and `rbind()`
 # to achieve the same purpose
@@ -116,15 +113,20 @@ head(bergen.bike.data)
 
 library(purrr)
 
-bergen.bike.data <- map_dfr(06:12, fread_trips_data, 2019, "Bergen")
+bergen.bike <- map_dfr(6:8, fread_trips_data, year = 2018, city = "Bergen")
 
 ```
 
-**NOTE!** I recommend that you use `fread_trips_data()` to fast read city bike data.
+**NB!** I recommend that you use `fread_trips_data()` to fast read city bike 
+data, especially if you want to read bike data for multiple months.
+
+**NB!** data.table is not automatically installed with bysykkel, and must be
+installed separately with `install.packages("data.table")` if you want to
+use `fread_trips_data()`.
 
 ### Download bike trips data
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, message = FALSE}
 library(bysykkel)
 
 # Download bike trip data for April 2019 for Trondheim
@@ -138,7 +140,12 @@ lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
 
 ### Get realtime data from the API service
 
-```{r, eval = FALSE}
+**NB!** Please read each City Bike's guide on how to correctly use their API 
+service before using `get_api_data()`. See
+[Oslo City Bike's guide](https://oslobysykkel.no/en/open-data/realtime)
+as an example.
+
+```{r, eval = FALSE, message = FALSE}
 library(bysykkel)
 
 # Get API data on bike stations as a dataframe
@@ -159,10 +166,10 @@ trondheim.system.information <- get_api_data("myname-myservice",
 
 ```
 
-## Getting help
+## File an issue
 
-If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/tidyverse/dplyr/issues). For questions and other discussion, please use [community.rstudio.com](https://community.rstudio.com/), or the [manipulatr mailing list](https://groups.google.com/group/manipulatr).
+If you want to report a discovered bug or raise some other issue with bysykkel, then
+please file an issue on [GitHub](https://github.com/PersianCatsLikeToMeow/bysykkel/issues).
+For bugs, please file a minimal reproducible example.
 
 ---
-Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.

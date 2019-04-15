@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bysykkel <img src='https://res.cloudinary.com/climb/image/upload/c_fill,f_auto,h_800,q_80/v1498809170/ximadvmr9aolkqkaqgmf' align="right" height="100" />
+# bysykkel
 
 <!-- badges: start -->
 
@@ -26,7 +26,10 @@ bysykkel lets you, the user, focus on data exploration, visualization,
 statistical analysis, and building machine learning models on Norwegian
 city bike data, by simplifying the task of getting the data. Indeed, the
 purpose of bysykkel is to minimize time spent on getting Norwegian city
-bike data.
+bike data, and lower the barrier to start analyzing the data.
+
+The package name is the Norwegian word for “city bikes”, where *by*
+means “city”, and *sykkel* means “bike” (or “bicycle”).
 
 ## Installation
 
@@ -40,7 +43,7 @@ install.packages("bysykkel")
 ### Development version
 
 Alternatively, you can install a development version of bysykkel from
-GitHub to get bug fixes, or new features, before the package is released
+GitHub to get bug fixes or new features before the package is released
 on CRAN. To install the development version, you can use devtools to
 install bysykkel from GitHub.
 
@@ -49,90 +52,124 @@ install bysykkel from GitHub.
 devtools::install_github("PersianCatsLikeToMeow/bysykkel")
 ```
 
-## Cheatsheet
+## Bike data
 
-<a href="https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-transformation-cheatsheet-thumbs.png" width="630" height="252"/></a>
+bysykkel interacts with four city bike services in Norway that make bike
+data publicly available\[1\]:
 
-## Usage
+  - [Oslo City Bike](https://oslobysykkel.no/en/open-data)
+  - [Oslo Winter Bike](https://oslovintersykkel.no/en/open-data)
+  - [Bergen City Bike](https://bergenbysykkel.no/en/open-data)
+  - [Trondheim City Bike](https://trondheimbysykkel.no/en/open-data)
+
+Each city bike service provide two data-related services:
+
+  - Historical trip data
+  - Realtime data
+
+The historical trip data is available both as a CSV-file, and a
+JSON-file, that contains monthly anonymized historical bike trip data.
+Realtime data is available in the [GBFS
+format](https://github.com/NABSA/gbfs/blob/master/gbfs.md), and must be
+accessed with each city bike’s API service, which provide information
+about
+
+  - bike and dock availability;
+  - stations (including geolocation, addresses and station
+    descriptions); and
+  - machine readable basic information about the city bike service.
+
+The data is made available under the Norwegian License for Open Data
+2.0, abbreviated as NLOD 2.0, which you can read about
+[here](https://data.norge.no/nlod/en/2.0).
+
+## Examples
+
+### Read bike trips data to R
 
 ``` r
-library(dplyr)
-starwars %>%
-  filter(species == "Droid")
-#> # A tibble: 5 x 13
-#>   name  height  mass hair_color skin_color eye_color birth_year gender
-#>   <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
-#> 1 C-3PO    167    75 <NA>       gold       yellow           112 <NA>  
-#> 2 R2-D2     96    32 <NA>       white, bl~ red               33 <NA>  
-#> 3 R5-D4     97    32 <NA>       white, red red               NA <NA>  
-#> 4 IG-88    200   140 none       metal      red               15 none  
-#> 5 BB8       NA    NA none       none       black             NA none  
-#> # ... with 5 more variables: homeworld <chr>, species <chr>, films <list>,
-#> #   vehicles <list>, starships <list>
-starwars %>%
-  select(name, ends_with("color"))
-#> # A tibble: 87 x 4
-#>   name           hair_color skin_color  eye_color
-#>   <chr>          <chr>      <chr>       <chr>    
-#> 1 Luke Skywalker blond      fair        blue     
-#> 2 C-3PO          <NA>       gold        yellow   
-#> 3 R2-D2          <NA>       white, blue red      
-#> 4 Darth Vader    none       white       yellow   
-#> 5 Leia Organa    brown      light       brown    
-#> # ... with 82 more rows
-starwars %>%
-  mutate(name, bmi = mass / ((height / 100)  ^ 2)) %>%
-  select(name:mass, bmi)
-#> # A tibble: 87 x 4
-#>   name           height  mass   bmi
-#>   <chr>           <int> <dbl> <dbl>
-#> 1 Luke Skywalker    172    77  26.0
-#> 2 C-3PO             167    75  26.9
-#> 3 R2-D2              96    32  34.7
-#> 4 Darth Vader       202   136  33.3
-#> 5 Leia Organa       150    49  21.8
-#> # ... with 82 more rows
-starwars %>%
-  arrange(desc(mass))
-#> # A tibble: 87 x 13
-#>   name  height  mass hair_color skin_color eye_color birth_year gender
-#>   <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
-#> 1 Jabb~    175  1358 <NA>       green-tan~ orange         600   herma~
-#> 2 Grie~    216   159 none       brown, wh~ green, y~       NA   male  
-#> 3 IG-88    200   140 none       metal      red             15   none  
-#> 4 Dart~    202   136 none       white      yellow          41.9 male  
-#> 5 Tarf~    234   136 brown      brown      blue            NA   male  
-#> # ... with 82 more rows, and 5 more variables: homeworld <chr>,
-#> #   species <chr>, films <list>, vehicles <list>, starships <list>
-starwars %>%
-  group_by(species) %>%
-  summarise(
-    n = n(),
-    mass = mean(mass, na.rm = TRUE)
-  ) %>%
-  filter(n > 1,
-         mass > 50)
-#> # A tibble: 8 x 3
-#>   species      n  mass
-#>   <chr>    <int> <dbl>
-#> 1 Droid        5  69.8
-#> 2 Gungan       3  74  
-#> 3 Human       35  82.8
-#> 4 Kaminoan     2  88  
-#> 5 Mirialan     2  53.1
-#> # ... with 3 more rows
+library(bysykkel)
+
+# Get bike trip data for April, 2019 for Oslo as a dataframe
+oslo.bike <- read_trips_data(year = 2019, month = 04, city = "Oslo")
+
+# Get winter bike data for January, 2019 for Oslo as a dataframe
+oslo.winter.bike <- read_trips_data(2019, 1, "OsloW")
+
+# Fast read bike data from June to August in 2018 for Bergen with `lapply()`,
+# and `rbind()` the resulting `list` with `do.call()`
+
+#! install.packages("data.table")
+
+bergen.bike <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
+bergen.bike <- do.call(rbind, bergen.bike)
+
+# Use `map_dfr()` from `purrr` instead of `lapply()` and `rbind()`
+# to achieve the same purpose
+
+#! install.packages("purrr")
+
+library(purrr)
+
+bergen.bike <- map_dfr(6:8, fread_trips_data, year = 2018, city = "Bergen")
 ```
 
-## Getting help
+**NB\!** I recommend that you use `fread_trips_data()` to fast read city
+bike data, especially if you want to read bike data for multiple months.
 
-If you encounter a clear bug, please file a minimal reproducible example
-on [github](https://github.com/tidyverse/dplyr/issues). For questions
-and other discussion, please use
-[community.rstudio.com](https://community.rstudio.com/), or the
-[manipulatr mailing list](https://groups.google.com/group/manipulatr).
+**NB\!** data.table is not automatically installed with bysykkel, and
+must be installed separately with `install.packages("data.table")` if
+you want to use `fread_trips_data()`.
+
+### Download bike trips data
+
+``` r
+library(bysykkel)
+
+# Download bike trip data for April 2019 for Trondheim
+dl_trips_data(2019, 04, "Trondheim")
+#> The CSV-file is downloaded to your R session's current working directory
+
+# Download bike trip data for summer 2018 for Oslo
+lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
+#> The CSV-files are downloaded to your R session's working directory
+```
+
+### Get realtime data from the API service
+
+**NB\!** Please read each City Bike’s guide on how to correctly use
+their API service before using `get_api_data()`. See [Oslo City Bike’s
+guide](https://oslobysykkel.no/en/open-data/realtime) as an example.
+
+``` r
+library(bysykkel)
+
+# Get API data on bike stations as a dataframe
+oslo.stations <- get_api_data(client_id = "myname-myname", 
+                              data = "stations",
+                              return_df = TRUE)
+
+# Get API data for bike availability as a list, which also contains data
+# on the (POSIX) time you made the API request
+bergen.availability <- get_api_data(client_id = "mycompany-myservice",
+                                    data = "availability",
+                                    return_df = FALSE)
+
+# Get API data on bike system information
+trondheim.system.information <- get_api_data("myname-myservice",
+                                             "system",
+                                             return_df = FALSE)
+```
+
+## File an issue
+
+If you want to report a discovered bug or raise some other issue with
+bysykkel, then please file an issue on
+[GitHub](https://github.com/PersianCatsLikeToMeow/bysykkel/issues). For
+bugs, please file a minimal reproducible example.
 
 -----
 
-Please note that this project is released with a [Contributor Code of
-Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
-you agree to abide by its terms.
+1.  There are more bike services in Norway, but as of the time of
+    writing, they do not make their bike data publicly available. These
+    bike services are (1) ;(2)
