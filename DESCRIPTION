@@ -1,9 +1,15 @@
 Package: bysykkel
 Type: Package
-Title: Functions to get, download, and read in city bike data in Norway
-Description: Functions for simplifying the process of getting, downloading,
-    and reading in open city bike data provided on the City Bike websites in Norway.
-Version: 0.1.0.0
+Title: Get City Bike Data from Norway
+Description: Functions to get, read, and download open bike data from 
+    the website and API service of each City Bike provider in Norway. These
+    functions assist the R user to read bike data to R, and download bike 
+    data to disk, such that the user can focus on data analysis without having
+    to leave R. The data is retrieved from the "open data" pages of Oslo City 
+    Bike, Oslo Winter Bike, Bergen City Bike, and Trondheim City Bike. The 
+    data is made available under the 
+    NLOD 2.0 <https://data.norge.no/nlod/en/2.0>.
+Version: 0.1.1.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
 URL: http://github.com/PersianCatsLikeToMeow/bysykkel
@@ -12,10 +18,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    data.table,
     glue (>= 1.3.0),
     httr,
     jsonlite,
+    lubridate,
     magrittr,
     tibble
 RoxygenNote: 6.1.1
+Suggests:
+    data.table

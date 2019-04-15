@@ -1,0 +1,168 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+# bysykkel <img src='https://res.cloudinary.com/climb/image/upload/c_fill,f_auto,h_800,q_80/v1498809170/ximadvmr9aolkqkaqgmf' align="right" height="100" />
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/bysykkel)](https://cran.r-project.org/package=bysykkel)
+<!-- badges: end -->
+
+## Overview
+
+bysykkel provides functions to easily process Norwegian city bike data, either by reading it directly to R or downloading it to your R session's working directory.
+
+* `read_trips_data()` reads bike trip data to R as a dataframe.
+* `fread_trips_data()` fast reads bike trip data to R as a dataframe by utilizing `fread()` from the data.table package.
+* `dl_trips_data()` downloads bike trip data to your working directory as a CSV-file.
+* `get_api_data()` gets realtime data from the city bike API service.
+
+bysykkel lets you, the user, focus on data exploration, visualization, statistical analysis, and building machine learning models on Norwegian city bike data, by simplifying the task of getting the data. Indeed, the purpose of bysykkel is to minimize time spent on getting Norwegian city bike data, and lower the barrier to start analyzing the data.
+
+The package name is the Norwegian word for "city bikes", where *by* means 
+"city", and *sykkel* means "bike" (or "bicycle").
+
+## Installation
+
+You can install the released version of bysykkel from [CRAN](https://CRAN.R-project.org) with:
+
+```{r, eval = FALSE}
+install.packages("bysykkel")
+```
+
+### Development version
+
+Alternatively, you can install a development version of bysykkel from GitHub to get bug fixes or new features before the package is released on CRAN. To install the development version, you can use devtools to install bysykkel from GitHub.
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("PersianCatsLikeToMeow/bysykkel")
+```
+
+## Bike data
+
+bysykkel interacts with four city bike services in Norway that make 
+bike data publicly available[^1]:
+
+[^1]: There are more bike services in Norway, but as of the time of writing,
+they do not make their bike data publicly available. These bike services are
+(1) ;(2)
+
+* [Oslo City Bike](https://oslobysykkel.no/en/open-data)
+* [Oslo Winter Bike](https://oslovintersykkel.no/en/open-data)
+* [Bergen City Bike](https://bergenbysykkel.no/en/open-data)
+* [Trondheim City Bike](https://trondheimbysykkel.no/en/open-data)
+
+Each city bike service provide two data-related services:
+
+* Historical trip data
+* Realtime data
+
+The historical trip data is available both as a CSV-file, and a JSON-file,
+that contains monthly anonymized historical bike trip data. Realtime
+data is available in the 
+[GBFS format](https://github.com/NABSA/gbfs/blob/master/gbfs.md), and must
+be accessed with each city bike's API service, which provide information
+about 
+
+* bike and dock availability;
+* stations (including geolocation, addresses and station descriptions); and
+* machine readable basic information about the city bike service. 
+
+The data is made available under the Norwegian License for Open Data 2.0,
+abbreviated as NLOD 2.0, which you can read about 
+[here](https://data.norge.no/nlod/en/2.0).
+
+## Examples
+
+### Read bike trips data to R
+
+```{r, message = FALSE}
+library(bysykkel)
+
+# Read bike data for April, 2019 for Oslo
+oslo.bike <- read_trips_data(year = 2019, month = 04, city = "Oslo")
+
+# Read winter bike data for January, 2019 for Oslo
+oslo.winter.bike <- read_trips_data(2019, 1, "OsloW")
+
+# Fast read bike data from June to December in 2018 for Bergen
+
+#! install.packages("data.table")
+
+library(data.table)
+
+bergen.bike.data <- lapply(06:12, fread_trips_data, 2019, "Bergen")
+bergen.bike.data <- do.call(rbind, bergen.bike.data)
+
+head(bergen.bike.data)
+
+# Use `map_dfr()` from `purrr` instead of `lapply()` and `rbind()`
+# to achieve the same purpose
+
+#! install.packages("purrr")
+
+library(purrr)
+
+bergen.bike.data <- map_dfr(06:12, fread_trips_data, 2019, "Bergen")
+
+```
+
+**NOTE!** I recommend that you use `fread_trips_data()` to fast read city bike data.
+
+### Download bike trips data
+
+```{r, eval = FALSE}
+library(bysykkel)
+
+# Download bike trip data for April 2019 for Trondheim
+dl_trips_data(2019, 04, "Trondheim")
+#> The CSV-file is downloaded to your R session's current working directory
+
+# Download bike trip data for summer 2018 for Oslo
+lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
+#> The CSV-files are downloaded to your R session's working directory
+```
+
+### Get realtime data from the API service
+
+```{r, eval = FALSE}
+library(bysykkel)
+
+# Get API data on bike stations as a dataframe
+oslo.stations <- get_api_data(client_id = "myname-myname", 
+                              data = "stations",
+                              return_df = TRUE)
+
+# Get API data for bike availability as a list, which also contains data
+# on the (POSIX) time you made the API request
+bergen.availability <- get_api_data(client_id = "mycompany-myservice",
+                                    data = "availability",
+                                    return_df = FALSE)
+
+# Get API data on bike system information
+trondheim.system.information <- get_api_data("myname-myservice",
+                                             "system",
+                                             return_df = FALSE)
+
+```
+
+## Getting help
+
+If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/tidyverse/dplyr/issues). For questions and other discussion, please use [community.rstudio.com](https://community.rstudio.com/), or the [manipulatr mailing list](https://groups.google.com/group/manipulatr).
+
+---
+Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
