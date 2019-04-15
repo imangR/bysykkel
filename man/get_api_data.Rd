@@ -33,8 +33,8 @@ contains two elements: a dataframe with the
 (i.e. a dataframe) only.
 }
 \description{
-\code{get_api_data} gets realtime data on bike availability and
-bike stations from the API for
+\code{get_api_data} gets realtime data on bike availability, stations, and
+system from the API for
 
 \itemize{
   \item \href{https://oslobysykkel.no/en/open-data/realtime}{Oslo City Bike},
