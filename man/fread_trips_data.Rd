@@ -24,14 +24,14 @@ and Trondheim directly to R.
 
 \code{fread_trips_data()} utilizes the
 \code{\link[data.table:fread]{fread()}} function from the \code{data.table}
-package to fast read the CSV-files, and is thus much faster than
-\code{\link{read_trips_data}}. \code{fread_trips_data()} requires that you
-have \code{data.table} installed. \code{\link[MASS]{abbey}}
+package to fast read the CSV-files. It is thus much faster than
+\code{read_trips_data}. \code{fread_trips_data()} requires that you
+have the \code{data.table} package installed.
 
-To get trip data for winter bikes in each city, add a capital "W" at
-the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip records for winter
-bikes are currently only available for Oslo at the time of writing
-(2019-03-04).
+To get bike trips data for winter bikes in each city, add a capital "W" at
+the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip data for
+ winter bikes are currently only available for Oslo at the time of writing
+(2019-04-16).
 
 The data is provided according to the Norwegian License for Open Government
 Data 2.0 (\href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}).

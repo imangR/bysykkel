@@ -25,8 +25,8 @@ as a tibble in R.
 historical bike trip records in Norway for the city of Oslo, Bergen,
 and Trondheim directly to R.
 
-To get trip records for winter bikes in each city, add a capital "W" at
-the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
+To get bike trips data for winter bikes in each city, add a capital "W" at
+the end of the city name (f.ex. "OsloW" for Oslo). Trip data for winter
 bikes are currently only available for Oslo at the time of writing
 (2019-04-16).
 

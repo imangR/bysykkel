@@ -20,10 +20,10 @@ download data from.}
 The function downloads a CSV-file to your current working directory.
 }
 \description{
-\code{dl_trips_data} downloads anonymized historical bike trip records in
-Norway for the city of Oslo, Bergen, and Trondheim.
+\code{dl_trips_data} downloads a CSV-file of anonymized historical bike
+trips data in Norway for the city of Oslo, Bergen, and Trondheim.
 
-To get trip records for winter bikes in each city, add a capital "W" at
+To download bike trips for winter bikes in each city, add a capital "W" at
 the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
 bikes are currently only available for Oslo at the time of writing
 (2019-03-04).
