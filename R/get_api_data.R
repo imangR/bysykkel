@@ -16,7 +16,7 @@
 #'
 #' The realtime data is provided in the GBFS (General Bikeshare Feed
 #' Specification) format, which you can read more about on
-#' \href{https://github.com/NABSA/gbfs/blob/master/gbfs.md}{GitHub}.
+#' \href{https://github.com/NABSA/gbfs/blob/master/gbfs.md}{here}.
 #'
 #' The data is provided according to the Norwegian License for Open Government
 #' Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.

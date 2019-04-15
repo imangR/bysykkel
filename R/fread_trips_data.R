@@ -1,23 +1,32 @@
-#' @title Fast read historical bike trips data in Norway into R
+#' @title Fast read historical bike trips data in Norway to R
 #'
 #' @description
 #' \code{fread_trips_data()} imports anonymized
 #' historical bike trip data in Norway for the city of Oslo, Bergen,
-#' and Trondheim directly into R.
+#' and Trondheim directly to R.
 #'
 #' \code{fread_trips_data()} utilizes the
 #' \code{\link[data.table:fread]{fread()}} function from the \code{data.table}
-#' to fast read the CSV-files, and thus is much faster than
-#' \code{\link{read_trips_data}}. \code{fread_trips_data()} requires that you
-#' have \code{data.table} installed.
+#' package to fast read the CSV-files. It is thus much faster than
+#' \code{read_trips_data}. \code{fread_trips_data()} requires that you
+#' have the \code{data.table} package installed.
 #'
-#' To get trip data for winter bikes in each city, add a capital "W" at
-#' the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip records for winter
-#' bikes are currently only available for Oslo at the time of writing
-#' (2019-03-04).
+#' To get bike trips data for winter bikes in each city, add a capital "W" at
+#' the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip data for
+#'  winter bikes are currently only available for Oslo at the time of writing
+#' (2019-04-16).
 #'
 #' The data is provided according to the Norwegian License for Open Government
 #' Data 2.0 (\href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}).
+#'
+#' The data is read from:
+#'
+#' \itemize{
+#'   \item \href{https://oslobysykkel.no/en/open-data/historical}{Oslo City Bike}
+#'   \item \href{https://oslovintersykkel.no/en/open-data/historical}{Oslo Winter Bike}
+#'   \item \href{https://bergenbysykkel.no/en/open-data/historical}{Bergen City Bike}
+#'   \item \href{https://trondheimbysykkel.no/en/open-data/historical}{Trondheim City Bike}
+#'}
 #'
 #' @usage
 #' fread_trips_data(year, month, city)
@@ -37,11 +46,9 @@
 #'
 #' @examples
 #' # Read bike trips data for the month of January 2019 in Bergen
-#'
 #' bergen_trips <- fread_trips_data(year = 2019, month = 1, city = "Bergen")
 #'
 #' # Read bike trips data for the month of October 2018 in Trondheim
-#'
 #' trondheim_trips <- fread_trips_data(2018, 10, "Trondheim")
 #'
 #' @importFrom glue glue
