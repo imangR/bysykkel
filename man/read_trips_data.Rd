@@ -32,7 +32,7 @@ the \code{fread} function in the \code{data.table} packages. To use
 
 To get trip records for winter bikes in each city, add a capital "W" at
 the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
-bikes are currently available for Oslo only at the time of writing
+bikes are currently only available for Oslo at the time of writing
 (2019-03-04).
 
 The data is provided according to the Norwegian License for Open Government
@@ -40,14 +40,20 @@ Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
 }
 \examples{
 \dontrun{
+
 # Read bike trips data for the month of January 2019 in Bergen
 bergen_trips <- read_trips_data(2019, 1, "Bergen")
 
 # Read bike trips data for the month of October 2018 in Trondheim
 trondheim_trips <- read_trips_data(2018, 10, "Trondheim")
 
-# Use "lapply" to read bike trips data for several months in Oslo
+# Use "lapply()" to read bike trips data for several months in Oslo
 oslo_winter_trips <- lapply(01:02, read_trips_data, year = 2019, city = "OsloW")
+
+# Use "rbind()" to bind each element of the list "oslo_winter_trips" to
+# to a dataframe
+oslo_winter_trips <- do.call(rbind, oslo_winter_trips)
+
 }
 
 }

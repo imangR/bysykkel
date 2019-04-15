@@ -7,10 +7,10 @@
 dl_trips_data(year, month, city)
 }
 \arguments{
-\item{year}{A numeric variable that informs the function for which year you want to
+\item{year}{A numeric that informs the function for which year you want to
 download data.}
 
-\item{month}{A numeric variable that informs the function for which year you want to
+\item{month}{A numeric that informs the function for which year you want to
 download data.}
 
 \item{city}{A character string that informs the function for which city you want to
@@ -25,22 +25,33 @@ Norway for the city of Oslo, Bergen, and Trondheim.
 
 To get trip records for winter bikes in each city, add a capital "W" at
 the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
-bikes are currently available for Oslo only at the time of writing
+bikes are currently only available for Oslo at the time of writing
 (2019-03-04).
 
 The data is provided according to the Norwegian License for Open Government
 Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
+
+The data is downloaded from:
+
+\itemize{
+  \item \href{https://oslobysykkel.no/en/open-data/historical}{Oslo City Bike}
+  \item \href{https://oslovintersykkel.no/en/open-data/historical}{Oslo Winter Bike}
+  \item \href{https://bergenbysykkel.no/en/open-data/historical}{Bergen City Bike}
+  \item \href{https://trondheimbysykkel.no/en/open-data/historical}{Trondheim City Bike}
+}
 }
 \examples{
 \dontrun{
+
 # Download bike trips data for the month of January, 2019, in Bergen
-dl_trips_data(2019, 01, "Bergen")
+dl_trips_data(year = 2019, month = 01, city = "Bergen")
 
 # Download bike trips data for the month of October, 2018, in Trondheim
 dl_trips_data(2018, 10, "Trondheim")
 
-# Use "lapply" to get bike trips data for several months in Oslo
-lapply(06:12, dl_trips_data, year = 2018, city = "Oslo")
+# Use "lapply()" to download bike trips data for several months in Oslo
+lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
+
 }
 
 }

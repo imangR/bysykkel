@@ -2,53 +2,47 @@
 % Please edit documentation in R/fread_trips_data.R
 \name{fread_trips_data}
 \alias{fread_trips_data}
-\title{Fast read historical bike trips data in Norway directly into R}
+\title{Fast read historical bike trips data in Norway into R}
 \usage{
 fread_trips_data(year, month, city)
 }
 \arguments{
-\item{year}{A numeric variable that informs the function for which year you want to
-download data.}
+\item{year}{A \code{numeric} variable. The year you want to download data for.}
 
-\item{month}{A numeric variable that informs the function for which year you want to
-download data.}
+\item{month}{A \code{numeric} variable. The month you want to download data for.}
 
-\item{city}{A character string that informs the function for which city you want to
-download data from.}
+\item{city}{A \code{character} string. The city you want to download data from.}
 }
 \value{
 The function reads in bike trips data for the specified year and month
 as a tibble in R.
 }
 \description{
-\code{fread_trips_data} imports anonymized
-historical bike trip records in Norway for the city of Oslo, Bergen,
+\code{fread_trips_data()} imports anonymized
+historical bike trip data in Norway for the city of Oslo, Bergen,
 and Trondheim directly into R.
 
-Reading the trip records CSV files from the City Bike websites can
-take its time using \code{read_trips_data}. To speed up the process,
-\code{fread_trips_data} utilizes the \code{fread} function in the
-\code{data.table} packages. To use \code{fread_trips_data} requires
-having \code{data.table} installed.
+\code{fread_trips_data()} utilizes the
+\code{\link[data.table:fread]{fread()}} function from the \code{data.table}
+to fast read the CSV-files, and thus is much faster than
+\code{\link{read_trips_data}}. \code{fread_trips_data()} requires that you
+have \code{data.table} installed.
 
-To get trip records for winter bikes in each city, add a capital "W" at
-the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
-bikes are currently available for Oslo only at the time of writing
+To get trip data for winter bikes in each city, add a capital "W" at
+the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip records for winter
+bikes are currently only available for Oslo at the time of writing
 (2019-03-04).
 
 The data is provided according to the Norwegian License for Open Government
-Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
+Data 2.0 (\href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}).
 }
 \examples{
-\dontrun{
 # Read bike trips data for the month of January 2019 in Bergen
-bergen_trips <- fread_trips_data(2019, 1, "Bergen")
+
+bergen_trips <- fread_trips_data(year = 2019, month = 1, city = "Bergen")
 
 # Read bike trips data for the month of October 2018 in Trondheim
-trondheim_trips <- fread_trips_data(2018, 10, "Trondheim")
 
-# Use "lapply" to read bike trips data for several months in Oslo
-oslo_winter_trips <- lapply(01:02, fread_trips_data, year = 2019, city = "OsloW")
-}
+trondheim_trips <- fread_trips_data(2018, 10, "Trondheim")
 
 }
