@@ -6,3 +6,4 @@ README.Rmd
 .gitignore
 .Rhistory
 .RData
+revdep
