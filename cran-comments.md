@@ -7,6 +7,8 @@ This is a resubmission. In this version I have:
 
 * Updated README.md
 
+* Updated NEWS.md
+
 * Moved "data.table" from "Imports" to "Suggests" in DESCRIPTION
 
 * Removed "magrittr" from "Imports"
