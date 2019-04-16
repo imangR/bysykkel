@@ -43,10 +43,14 @@ The data is read from:
 }
 }
 \examples{
+\dontrun{
+
 # Read bike trips data for the month of January 2019 in Bergen
 bergen_trips <- read_trips_data(2019, 1, "Bergen")
 
 # Read bike trips data for the month of October 2018 in Trondheim
 trondheim_trips <- read_trips_data(2018, 10, "Trondheim")
+
+}
 
 }
