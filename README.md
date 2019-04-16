@@ -150,7 +150,7 @@ represents the (POSIX) time of when you made the API request.
 library(bysykkel)
 
 # Get API data on bike stations as a dataframe
-oslo.stations <- get_api_data(client_id = "myname-myname", 
+oslo.stations <- get_api_data(client_id = "myname-myapp", 
                               data = "stations",
                               return_df = TRUE)
 
@@ -161,7 +161,7 @@ bergen.availability <- get_api_data(client_id = "mycompany-myservice",
                                     return_df = FALSE)
 
 # Get API data on bike system information
-trondheim.system.information <- get_api_data("myname-myservice",
+trondheim.system.information <- get_api_data("Ola Nordmann-bike dashboard",
                                              "system",
                                              return_df = FALSE)
 ```
@@ -178,4 +178,10 @@ bugs, please file a minimal reproducible example.
 1.  Bike data for [Bærum City
     Bike](https://www.baerum.kommune.no/tjenester/vei-trafikk-og-parkering/sykkel-i-barum/bysykkel/)
     (unavailable in English) and [Oslo Cargo
-    Bike](https://oslolastesykkel.no/en) is not publicly available.
+    Bike](https://oslolastesykkel.no/en) is not publicly available. This
+    [article](https://medium.com/urbansharing/piloting-cargo-bikes-to-study-oslos-combined-mobility-needs-b4a8bf536c60)
+    states that “(…) all data and findings wil be shared openly (…)”
+    regarding the Oslo Cargo Bike pilot in collaboration with Hertz’s
+    carpool service. However, that data is either (1) available
+    somewhere else than the Oslo Cargo Bike website; or (2) not yet
+    publicly available.
