@@ -7,6 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/bysykkel)](https://cran.r-project.org/package=bysykkel)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/PersianCatsLikeToMeow/bysykkel/blob/master/LICENSE)
 <!-- badges: end -->
 
 ## Overview
