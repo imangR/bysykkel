@@ -27,10 +27,10 @@ bysykkel lets you, the user, focus on data exploration, visualization,
 statistical analysis, and building machine learning models on Norwegian
 city bike data, by simplifying the task of getting the data. Indeed, the
 purpose of bysykkel is to minimize time spent on getting Norwegian city
-bike data, and lower the barrier to start analyzing the data.
+bike data, and lower the barrier to start analyzing it.
 
-The package name is the Norwegian word for “city bikes”, where *by*
-means “city”, and *sykkel* means “bike” (or “bicycle”).
+The package name, *bysykkel*, is the Norwegian word for “city bikes”,
+where *by* means “city”, and *sykkel* means “bike” (or “bicycle”).
 
 ## Installation
 
@@ -49,7 +49,7 @@ is released on CRAN. To install the development version, you can use
 devtools to install bysykkel from GitHub.
 
 ``` r
-# install.packages("devtools")
+#! install.packages("devtools")
 devtools::install_github("PersianCatsLikeToMeow/bysykkel")
 ```
 
@@ -92,18 +92,18 @@ The data is made available under the Norwegian License for Open Data
 library(bysykkel)
 
 # Get bike trip data for April, 2019 for Oslo as a dataframe
-oslo.bike <- read_trips_data(year = 2019, month = 04, city = "Oslo")
+oslo_trips <- read_trips_data(year = 2019, month = 04, city = "Oslo")
 
 # Get winter bike data for January, 2019 for Oslo as a dataframe
-oslo.winter.bike <- read_trips_data(2019, 1, "OsloW")
+oslo_winter_trips <- read_trips_data(2019, 1, "OsloW")
 
 # Fast read bike data from June to August in 2018 for Bergen with `lapply()`,
 # and `rbind()` the resulting `list` with `do.call()` to get a dataframe
 
 #! install.packages("data.table")
 
-bergen.bike <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
-bergen.bike <- do.call(rbind, bergen.bike)
+bergen_trips <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
+bergen_trips <- do.call(rbind, bergen.bike)
 
 # Alternatively, use `map_dfr()` from `purrr` instead of `lapply()`,
 # `rbind()`, and `do.call() to get the same result: a dataframe
@@ -112,7 +112,7 @@ bergen.bike <- do.call(rbind, bergen.bike)
 
 library(purrr)
 
-bergen.bike <- map_dfr(6:8, fread_trips_data, year = 2018, city = "Bergen")
+bergen_trips <- map_dfr(6:8, fread_trips_data, year = 2018, city = "Bergen")
 ```
 
 **NB\!** I recommend that you use `fread_trips_data()` to fast read city
@@ -143,28 +143,32 @@ their API service before using `get_api_data()`. See [Oslo City Bike’s
 guide](https://oslobysykkel.no/en/open-data/realtime) as an example.
 
 The `return_df` argument in `get_api_data()` specifies whether you want
-to return the result as a list. If `return_df = FALSE`, then the
-function returns a list that contains a dataframe, and a number that
-represents the (POSIX) time of when you made the API request.
+to return the result as a dataframe. If `return_df = FALSE` (default),
+then the function returns a list that contains a dataframe, and a number
+that represents the datetime (in POSIX format) of when you made the API
+request.
 
 ``` r
 library(bysykkel)
 
 # Get API data on bike stations as a dataframe
-oslo.stations <- get_api_data(client_id = "myname-myapp", 
+oslo_stations <- get_api_data(client_id = "myname-myapp", 
                               data = "stations",
+                              city = "Oslo",
                               return_df = TRUE)
 
 # Get API data for bike availability as a list that contains a dataframe, and
 # a number that represents the (POSIX) time of when you made the API request
-bergen.availability <- get_api_data(client_id = "mycompany-myservice",
+bergen_availability <- get_api_data(client_id = "mycompany-myservice",
                                     data = "availability",
+                                    city = "Bergen",
                                     return_df = FALSE)
 
 # Get API data on bike system information
-trondheim.system.information <- get_api_data("Ola Nordmann-bike dashboard",
-                                             "system",
-                                             return_df = FALSE)
+trondheim_system <- get_api_data("Ola Nordmann-bike dashboard",
+                                 "system",
+                                 "Trondheim",
+                                 return_df = FALSE)
 ```
 
 ## File an issue or suggest an improvement
