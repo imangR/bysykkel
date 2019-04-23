@@ -26,6 +26,7 @@ read_trips_data_oslo <- function(year, month) {
     # downloading a zip-file that contains bike trip data, create a
     # connection to the zip-file, and read the underlying CSV-file
     # in the zip-file to R
+    temp <- tempfile()
     download.file(dl_url, temp)
     filename <- bysykkel_control_legacy_oslo(year, month)
     bike_df <- read.csv(unz(temp, filename),
