@@ -84,16 +84,12 @@ bysykkel_control_api_input(client_id, data, city, return_df)
 
 # Control structure -------------------------------------------------------
 
-  if (city == "Oslo") {
-    get_api_data_oslo(client_id, data, return_df)
-  } else if (city == "OsloW") {
-    get_api_data_oslow(client_id, data, return_df)
-  } else if (city == "Bergen") {
-    get_api_data_bergen(client_id, data, return_df)
-  } else if (city == "Trondheim") {
-    get_api_data_trondheim(client_id, data, return_df)
-  } else {
-    warning("Something went wrong.")
-  }
+  switch(city,
+    "Oslo" = get_api_data_oslo(year, month),
+    "OsloW" = get_api_data_oslow(year, month),
+    "Bergen" = get_api_data_bergen(year, month),
+    "Trondheim" = get_api_data_trondheim(year, month),
+    stop("Something went wrong.")
+  )
 
 }

@@ -82,16 +82,12 @@ fread_trips_data <- function(year, month, city) {
 
   # Control structure -------------------------------------------------------
 
-  if (city == "Oslo") {
-    fread_trips_data_oslo(year, month)
-  } else if (city == "OsloW") {
-    fread_trips_data_oslow(year, month)
-  } else if (city == "Bergen") {
-    fread_trips_data_bergen(year, month)
-  } else if (city == "Trondheim") {
-    fread_trips_data_trondheim(year, month)
-  } else {
-    warning("Something went wrong.")
-  }
+  switch(city,
+         "Oslo" = fread_trips_data_oslo(year, month),
+         "OsloW" = fread_trips_data_oslow(year, month),
+         "Bergen" = fread_trips_data_bergen(year, month),
+         "Trondheim" = fread_trips_data_trondheim(year, month),
+         stop("Something went wrong.")
+  )
 
 }

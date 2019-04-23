@@ -7,6 +7,9 @@ bysykkel_control_date <- function(year, month, city) {
   # Store the year and month used as input in the `bysykkel` function
   function.year <- year
   function.month <- lubridate::month(month, label = TRUE, abbr = FALSE)
+  function.month.num <- month
+
+  ## Convert function input to a `date` object to make date comparisons
   function.date <- paste(function.year, "-", function.month, "-", 1, sep = "")
   function.date <- as.Date(function.date, format = "%Y-%B-%d")
 
@@ -16,33 +19,51 @@ bysykkel_control_date <- function(year, month, city) {
                         Trondheim = 2018,
                         OsloW     = 2018)
 
-# Control structure -------------------------------------------------------
+  # Control structure -------------------------------------------------------
 
   # Stop if `function.year` is too low
   if (function.year < min.year.list[[city]]) {
 
-    stop(glue::glue("There is no bike data for that year. Bike data for ",
-                    "{city} is available from {min.year.list[[city]]} at ",
-                    "the earliest, while you requested data for ",
-                    "{function.year}."))
+    message <-
+      glue::glue("There is no bike data for that year. Bike data for ",
+                 "{city} is available from {min.year.list[[city]]} at ",
+                 "the earliest, while you requested data for ",
+                 "{function.year}.")
+
+    stop(message, call. = FALSE)
+
+  }
 
   # Stop if `function.year` is too high
-  } else if (function.year > current.year) {
+  if (function.year > current.year) {
 
-      stop(glue::glue("Bike data for {function.year} does not exist...yet."))
+    message <-
+      glue::glue("Bike data for {function.year} does not exist...yet.")
+
+    stop(message, call. = FALSE)
+
+  }
 
   # Stop if `function.month` is "NA"
-  } else if (is.na(function.month)) {
+  if (is.na(function.month)) {
 
-      stop(glue::glue("The month number {as.integer(function.month)} does ",
-                      "not exist in the Gregorian calendar."))
+    message <-
+      glue::glue("The month number {function.month.num} does ",
+                 "not exist in the Gregorian calendar.")
+
+    stop(message, call. = FALSE)
+
+  }
 
   # Stop if `function.month` is too high
-  } else if (function.date > Sys.Date()) {
+  if (function.date > Sys.Date()) {
 
-      stop(glue::glue("Bike data for {function.month}, {function.year} does ",
-                      "not exist yet since the month and year is currently ",
-                      "{current.month}, {current.year}."))
+    message <-
+      glue::glue("Bike data for {function.month}, {function.year} does ",
+                 "not exist yet since the month and year is currently ",
+                 "{current.month}, {current.year}.")
+
+    stop(message, call. = FALSE)
 
   }
 

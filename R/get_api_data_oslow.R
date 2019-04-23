@@ -18,23 +18,19 @@ get_api_data_oslow <- function(client_id, data, return_df = FALSE) {
 
     avail_df <- avail_result$data$stations
 
-    avail_df[, "last_reported"] <-  as.POSIXct(avail_df$last_reported,
-                                               origin = "1970-01-01",
-                                               tz = "Europe/Oslo")
+    avail_df$last_reported <- as.POSIXct(avail_df$last_reported,
+                                         origin = "1970-01-01",
+                                         tz = "Europe/Oslo")
 
     avail_df <- tibble::as_tibble(avail_df)
 
     # A control that returns only a dataframe
     # if the `return_df` argument is set to TRUE.
-    if (return_df) {
-      return(avail_df)
-    }
+    if (return_df) return(avail_df)
 
     # Return a list if the `return_df` argument is set to FALSE.
     avail_data <- list(availability_df = avail_df,
-                       last_updated    = avail_result$last_updated)
-
-    return(avail_data)
+                       last_updated = avail_result$last_updated)
 
     # Stations ----------------------------------------------------------------
 
@@ -54,15 +50,11 @@ get_api_data_oslow <- function(client_id, data, return_df = FALSE) {
 
     # A control that returns only a dataframe
     # if the `return_df` argument is set to TRUE.
-    if (return_df) {
-      return(stations_df)
-    }
+    if (return_df) return(stations_df)
 
     # Return a list if the `return_df` argument is set to FALSE.
     stations_data <- list(stations_df = stations_df,
                           last_updated = stations_result$last_updated)
-
-    return(stations_data)
 
   } else if (data == "system") { # Get 'System'
 
@@ -80,9 +72,7 @@ get_api_data_oslow <- function(client_id, data, return_df = FALSE) {
 
     # A control that returns only a dataframe
     # if the `return_df` argument is set to TRUE.
-    if (return_df) {
-      return(system_df)
-    }
+    if (return_df) return(system_df)
 
     # Return a list if the `return_df` argument is set to FALSE.
     system_data <- list(system_df = system_df,
@@ -90,7 +80,8 @@ get_api_data_oslow <- function(client_id, data, return_df = FALSE) {
 
   } else {
 
-    warning("Something went wrong.")
+    stop("Something went wrong.")
 
   }
+
 }
