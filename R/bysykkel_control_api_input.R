@@ -78,13 +78,23 @@ bysykkel_control_api_input <- function(client_id, data, city, return_df) {
 
   }
 
+  if (length(city) > 1) {
+
+    message <-
+      glue::glue("`city` must be of length 1. You have input ",
+                 "`city` as a vector of length {length(city)}.")
+
+    stop(message, call. = FALSE)
+
+  }
+
 # Control `return_df` -----------------------------------------------------
 
-  if (!is.logical(return_df)) {
+  if (!is.logical(return_df) || identical(return_df, NA)) {
 
     message <-
       glue::glue("`return_df` must be TRUE/FALSE of type `logical`. You ",
-                 "have input {return_df}, which is a ",
+                 "have input {return_df} of type ",
                  "`{class(return_df)}`.")
 
     stop(message, call. = FALSE)

@@ -48,20 +48,21 @@ bysykkel_control_date <- function(year, month, city) {
   if (is.na(function.month)) {
 
     message <-
-      glue::glue("The month number {function.month.num} does ",
-                 "not exist in the Gregorian calendar.")
+      glue::glue("The month number {function.month.num} does not exist in ",
+                 "the Gregorian calendar. Please enter `month` as a number ",
+                 "in the [1, 12] range.")
 
     stop(message, call. = FALSE)
 
   }
 
-  # Stop if `function.month` is too high
+  # Stop if `function.date` is too high
   if (function.date > Sys.Date()) {
 
     message <-
-      glue::glue("Bike data for {function.month}, {function.year} does ",
-                 "not exist yet since the month and year is currently ",
-                 "{current.month}, {current.year}.")
+      glue::glue("Bike data for {function.year}-{function.month} does ",
+                 "not exist yet since the year and month is currently ",
+                 "{current.year}-{current.month}.")
 
     stop(message, call. = FALSE)
 
