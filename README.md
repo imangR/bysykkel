@@ -12,22 +12,24 @@ status](https://www.r-pkg.org/badges/version/bysykkel)](https://cran.r-project.o
 
 ## Overview
 
-bysykkel provides functions to easily process Norwegian city bike data,
-either by reading it directly to R or downloading it to your R session’s
-working directory.
+bysykkel is an R package that provides functions that simplifies the
+task of gathering Norwegian city bike data for data analysis. bysykkel
+provides functions to read city bike data directly to R or download it
+to your R session’s working directory.
 
-  - `read_trips_data()` reads bike trip data to R as a dataframe.
-  - `fread_trips_data()` fast reads bike trip data to R as a dataframe
+  - `read_trips_data()` reads bike trip data to R as a data frame.
+  - `fread_trips_data()` fast reads bike trip data to R as a data frame
     by utilizing `fread()` from data.table.
   - `dl_trips_data()` downloads bike trip data to your working directory
     as a CSV-file.
-  - `get_api_data()` gets realtime data from the city bike API service.
+  - `get_api_data()` gets real-time data from the specified city bike
+    API service.
 
 bysykkel lets you, the user, focus on data exploration, visualization,
 statistical analysis, and building machine learning models on Norwegian
 city bike data, by simplifying the task of getting the data. Indeed, the
-purpose of bysykkel is to minimize time spent on getting Norwegian city
-bike data, and lower the barrier to start analyzing it.
+purpose of bysykkel is to reduce time spent on getting Norwegian city
+bike data, and lower barriers to start analyzing it.
 
 The package name, *bysykkel*, is the Norwegian word for “city bikes”,
 where *by* means “city”, and *sykkel* means “bike” (or “bicycle”).
@@ -66,11 +68,11 @@ data publicly available\[1\]:
 Each city bike service provide two data-related services:
 
   - Historical trip data
-  - Realtime data
+  - Real-time data
 
 The historical trip data is available both as a CSV-file, and a
 JSON-file, that contains monthly anonymized historical bike trip data.
-Realtime data is available in the [GBFS
+Real-time data is available in the [GBFS
 format](https://github.com/NABSA/gbfs/blob/master/gbfs.md), and must be
 accessed with each city bike’s API service, which provide information
 about
@@ -103,7 +105,7 @@ oslo_winter_trips <- read_trips_data(2019, 1, "OsloW")
 #! install.packages("data.table")
 
 bergen_trips <- lapply(06:08, fread_trips_data, year = 2018, city = "Bergen")
-bergen_trips <- do.call(rbind, bergen.bike)
+bergen_trips <- do.call(rbind, bergen_trips)
 
 # Alternatively, use `map_dfr()` from `purrr` instead of `lapply()`,
 # `rbind()`, and `do.call() to get the same result: a dataframe
@@ -116,7 +118,7 @@ bergen_trips <- map_dfr(6:8, fread_trips_data, year = 2018, city = "Bergen")
 ```
 
 **NB\!** I recommend that you use `fread_trips_data()` to fast read city
-bike data, especially if you want to read bike data for multiple months.
+bike data, especially if you want to read bike data for several months.
 
 **NB\!** data.table is not automatically installed with bysykkel, and
 must be installed separately with `install.packages("data.table")` if
@@ -136,14 +138,14 @@ lapply(06:08, dl_trips_data, year = 2018, city = "Oslo")
 #> The CSV-file for each month is downloaded to your R session's working directory
 ```
 
-### Get realtime data from the API service
+### Get real-time data from the API service
 
 **NB\!** Please read each City Bike’s guide on how to correctly use
 their API service before using `get_api_data()`. See [Oslo City Bike’s
 guide](https://oslobysykkel.no/en/open-data/realtime) as an example.
 
 The `return_df` argument in `get_api_data()` specifies whether you want
-to return the result as a dataframe. If `return_df = FALSE` (default),
+to return the result as a data frame. If `return_df = FALSE` (default),
 then the function returns a list that contains a dataframe, and a number
 that represents the datetime (in POSIX format) of when you made the API
 request.
