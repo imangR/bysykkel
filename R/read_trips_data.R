@@ -2,13 +2,13 @@
 #'
 #' @description
 #' \code{read_trips_data} imports anonymized
-#' historical bike trip records in Norway for the city of Oslo, Bergen,
+#' historical bike trips data in Norway for the city of Oslo, Bergen,
 #' and Trondheim directly to R.
 #'
-#' To get bike trips data for winter bikes in each city, add a capital "W" at
-#' the end of the city name (f.ex. "OsloW" for Oslo). Trip data for winter
+#' To read bike trips data for winter bikes in Oslo, add a capital "W" at
+#' the end of the city name (i.e. "OsloW"). Trip records for winter
 #' bikes are currently only available for Oslo at the time of writing
-#' (2019-04-16).
+#' (2019-03-04).
 #'
 #' The data is provided according to the Norwegian License for Open Government
 #' Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
@@ -26,20 +26,18 @@
 #' read_trips_data(year, month, city)
 #'
 #' @param year
-#' A numeric variable that informs the function for which year you want to
-#' download data.
+#' A number. The year that you want to download data for.
 #'
 #' @param month
-#' A numeric variable that informs the function for which year you want to
-#' download data.
+#' A number. The month that you want to download data for.
 #'
 #' @param city
-#' A character string that informs the function for which city you want to
-#' download data from.
+#' A string. The city you want to download data from. The options are
+#' "Oslo", "OsloW", "Bergen", and "Trondheim".
 #'
 #' @return
-#' The function reads in bike trips data for the specified year and month
-#' as a tibble in R.
+#' The function reads in bike trips data for the specified year, month, and city
+#' to R as a tibble.
 #'
 #' @examples
 #' \dontrun{

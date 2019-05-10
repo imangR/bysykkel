@@ -1,7 +1,7 @@
-#' @title Get realtime data from the City Bike APIs in Norway
+#' @title Get real-time data from the city bike APIs in Norway
 #'
 #' @description
-#' \code{get_api_data} gets realtime data on bike availability, stations, and
+#' \code{get_api_data} gets real-time data on bike availability, stations, and
 #' system from the API for
 #'
 #' \itemize{
@@ -14,7 +14,7 @@
 #' Please read the API documentation for each City Bike API before using
 #' this function.
 #'
-#' The realtime data is provided in the GBFS (General Bikeshare Feed
+#' The real-time data is provided in the GBFS (General Bikeshare Feed
 #' Specification) format, which you can read more about on
 #' \href{https://github.com/NABSA/gbfs/blob/master/gbfs.md}{here}.
 #'
@@ -25,33 +25,31 @@
 #' get_api_data(client_id, data, city, return_df = FALSE)
 #'
 #' @param client_id
-#' A character string that contains a client identifier to access the API. The
-#' client identifier must be of the form \code{"myname-myapp"} or
-#' \code{"mycompany-myservice"}, such that the API service knows
-#' who is accessing the API and for what purpose. Please visit the website
-#' of the City Bike data you want to access to learn how to correctly specify
+#' A string. The string should represent a client identifier to access the
+#' API. The client identifier must be of the form \code{"myname-myapp"} or
+#' \code{"mycompany-myservice"}, such that the city bike service knows
+#' who is accessing the API, and for what purpose(s). Please visit the website
+#' of the API service that you want to access to learn how to correctly specify
 #' the \code{client_id}.
 #'
 #' @param data
-#' A character string that informs the function that you want to retrieve data
-#' for \code{"availability"}, \code{"stations"}, or \code{"system"}.
+#' A string. The data that you want to get from the API. The options are
+#' "availability", "stations", and "system".
 #'
 #' @param city
-#' A character string that informs the function whether you want to retrieve
-#' realtime data for \code{"Oslo"}, \code{"OsloW"} (for winter bike data in
-#' Oslo), \code{"Bergen"}, or \code{"Trondheim"}.
+#' A string. The city, or city bike service API, that you want to get data
+#' from. The options are "Oslo", "OsloW" (for winter bike data
+#' in Oslo), "Bergen", or "Trondheim".
 #'
 #' @param return_df
-#' A logical that specifies whether you want the function
-#' to return a \code{tibble} (i.e. a \code{dataframe}) that
-#' contains the "main" data from the GET request. Defaults to \code{FALSE}.
+#' Either \code{TRUE} or \code{FALSE}. Instructs the function on whether to
+#' return only a tibble (if set to \code{TRUE}).
 #'
 #' @return
 #' If \code{return_df = FALSE}, then the function returns a \code{list} that
-#' contains two elements: a dataframe with the
+#' contains two elements: a data frame with the
 #' "main" data, and the datetime (POSIX) for the API request. If
-#' \code{return_df = FALSE}, then the function returns a \code{tibble}
-#' (i.e. a dataframe) only.
+#' \code{return_df = TRUE}, then the function returns only a tibble.
 #'
 #' @examples
 #'\dontrun{
