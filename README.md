@@ -180,6 +180,15 @@ suggest an improvement to bysykkel, then please file an issue on
 [GitHub](https://github.com/PersianCatsLikeToMeow/bysykkel/issues). For
 bugs, please file a minimal reproducible example.
 
+## Known issues
+
+  - There is an issue with `fread_trips_data()` in the current CRAN
+    release of bysykkel (i.e. version 0.1.1.0), which renders it unable
+    to read bike trips data directly to R. If you want to use
+    `fread_trips_data()`, then I recommend that you download the
+    development version of bysykkel from GitHub, where the issue is
+    resolved.
+
 -----
 
 1.  Bike data for [Bærum City
