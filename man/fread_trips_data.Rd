@@ -7,31 +7,32 @@
 fread_trips_data(year, month, city)
 }
 \arguments{
-\item{year}{A \code{numeric} variable. The year you want to download data for.}
+\item{year}{A number. The year that you want to download data for.}
 
-\item{month}{A \code{numeric} variable. The month you want to download data for.}
+\item{month}{A number. The month that you want to download data for.}
 
-\item{city}{A \code{character} string. The city you want to download data from.}
+\item{city}{A string. The city you want to download data from. The options are
+"Oslo", "OsloW", "Bergen", and "Trondheim".}
 }
 \value{
-The function reads in bike trips data for the specified year and month
-as a tibble in R.
+The function reads in bike trips data for the specified year, month, and city
+to R as a tibble.
 }
 \description{
 \code{fread_trips_data()} imports anonymized
-historical bike trip data in Norway for the city of Oslo, Bergen,
-and Trondheim directly to R.
+historical bike trips data the city of Oslo, Bergen,
+and Trondheim, in Norway, directly to R.
 
 \code{fread_trips_data()} utilizes the
 \code{\link[data.table:fread]{fread()}} function from the \code{data.table}
-package to fast read the CSV-files. It is thus much faster than
+package to fast read the CSV-files. Hence, it is much faster than
 \code{read_trips_data}. \code{fread_trips_data()} requires that you
 have the \code{data.table} package installed.
 
-To get bike trips data for winter bikes in each city, add a capital "W" at
-the end of the city name (f.ex. \code{"OsloW"} for Oslo). Trip data for
- winter bikes are currently only available for Oslo at the time of writing
-(2019-04-16).
+To read bike trips data for winter bikes in Oslo, add a capital "W" at
+the end of the city name (i.e. "OsloW"). Trip records for winter
+bikes are currently only available for Oslo at the time of writing
+(2019-03-04).
 
 The data is provided according to the Norwegian License for Open Government
 Data 2.0 (\href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}).
@@ -46,10 +47,10 @@ The data is read from:
 }
 }
 \examples{
-# Read bike trips data for the month of January 2019 in Bergen
+# Fast read bike trips data for the month of January 2019 in Bergen
 bergen_trips <- fread_trips_data(year = 2019, month = 1, city = "Bergen")
 
-# Read bike trips data for the month of October 2018 in Trondheim
+# Fast read bike trips data for the month of October 2018 in Trondheim
 trondheim_trips <- fread_trips_data(2018, 10, "Trondheim")
 
 }

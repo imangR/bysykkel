@@ -7,14 +7,12 @@
 dl_trips_data(year, month, city)
 }
 \arguments{
-\item{year}{A numeric that informs the function for which year you want to
-download data.}
+\item{year}{A number. The year that you want to download data for.}
 
-\item{month}{A numeric that informs the function for which year you want to
-download data.}
+\item{month}{A number. The month that you want to download data for.}
 
-\item{city}{A character string that informs the function for which city you want to
-download data from.}
+\item{city}{A string. The city that you want to download data for. The options are
+"Oslo", "OsloW", "Bergen", and "Trondheim".}
 }
 \value{
 The function downloads a CSV-file to your current working directory.
@@ -23,8 +21,8 @@ The function downloads a CSV-file to your current working directory.
 \code{dl_trips_data} downloads a CSV-file of anonymized historical bike
 trips data in Norway for the city of Oslo, Bergen, and Trondheim.
 
-To download bike trips for winter bikes in each city, add a capital "W" at
-the end of the city name (f.ex. "OsloW" for Oslo). Trip records for winter
+To download bike trips data for winter bikes in Oslo, add a capital "W" at
+the end of the city name (i.e. "OsloW"). Trip records for winter
 bikes are currently only available for Oslo at the time of writing
 (2019-03-04).
 
