@@ -8,7 +8,7 @@ Description: Functions to get and download city bike data from
     Oslo City Bike, Oslo Winter Bike, Bergen City Bike, and Trondheim City 
     Bike. The data is made available under 
     NLOD 2.0 <https://data.norge.no/nlod/en/2.0>.
-Version: 0.2.3.9000
+Version: 0.2.3
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
 URL: http://github.com/PersianCatsLikeToMeow/bysykkel
