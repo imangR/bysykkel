@@ -1,4 +1,4 @@
-# bysykkel 0.2.1
+# bysykkel 0.2.3
 
 ## General
 
@@ -12,9 +12,12 @@ These functions have been repaired.
 * Removed package dependency to `magrittr`.
 
 * Added `bysykkel_control_*` functions to improve error handling, and error
-messages, so that it is (hopefully) more clear to the user what the error is.
+messages, so that it is (hopefully) more clear to the user what caused an 
+error.
 
 * Updated the object documentation for all functions.
+
+* Updated README.md
 
 ## Minor changes
 
