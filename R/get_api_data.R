@@ -76,17 +76,19 @@
 
 get_api_data <- function(client_id, data, city, return_df = FALSE) {
 
-# Control input arguments -------------------------------------------------
+  # Control input arguments -------------------------------------------------
 
-bysykkel_control_api_input(client_id, data, city, return_df)
+  bysykkel_control_api_input(client_id, data, city, return_df)
 
-# Control structure -------------------------------------------------------
+  message(glue::glue("Getting {data} data for {city}."))
+
+  # Control structure -------------------------------------------------------
 
   switch(city,
-    "Oslo" = get_api_data_oslo(year, month),
-    "OsloW" = get_api_data_oslow(year, month),
-    "Bergen" = get_api_data_bergen(year, month),
-    "Trondheim" = get_api_data_trondheim(year, month),
+    "Oslo" = get_api_data_oslo(client_id, data, return_df),
+    "OsloW" = get_api_data_oslow(client_id, data, return_df),
+    "Bergen" = get_api_data_bergen(client_id, data, return_df),
+    "Trondheim" = get_api_data_trondheim(client_id, data, return_df),
     stop("Something went wrong.")
   )
 

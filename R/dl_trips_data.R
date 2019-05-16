@@ -65,7 +65,9 @@ dl_trips_data <- function(year, month, city) {
 
   bysykkel_control_date(year, month, city)
 
-  print(glue::glue("Downloading data for {year}-{sprintf('%0.2d', month)} for the city of {city}."))
+  message(glue::glue("Downloading bike data for {city} for ",
+                     "{lubridate::month(month, label = TRUE, abbr = FALSE)}, ",
+                     "{year}."))
 
   # Control structure -------------------------------------------------------
 

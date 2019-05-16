@@ -12,7 +12,7 @@ bysykkel_control_input <- function(year, month, city) {
 
   }
 
-  if (length(year) > 1) {
+  if (length(year) != 1) {
 
     message <-
       glue::glue("`year` must be of length 1. You have input `year` as a ",
@@ -34,7 +34,7 @@ bysykkel_control_input <- function(year, month, city) {
 
   }
 
-  if (length(month) > 1) {
+  if (length(month) != 1) {
 
     message <-
       glue::glue("`month` must be of length 1. You have input `month` as a ",
@@ -56,7 +56,7 @@ bysykkel_control_input <- function(year, month, city) {
 
   }
 
-  if (length(city) > 1) {
+  if (length(city) != 1) {
 
     message <-
       glue::glue("`city` must be of length 1. You have input `city` as a ",

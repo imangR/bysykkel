@@ -77,9 +77,9 @@ fread_trips_data <- function(year, month, city) {
 
   bysykkel_control_date(year, month, city)
 
-  print(glue::glue("Getting bike data for ",
-                   "{lubridate::month(month, label = TRUE, abbr = FALSE)}, ",
-                   "{year} for {city}."))
+  message(glue::glue("Getting bike data for {city} for ",
+                     "{lubridate::month(month, label = TRUE, abbr = FALSE)}, ",
+                     "{year}."))
 
   # Control structure -------------------------------------------------------
 

@@ -12,7 +12,7 @@ bysykkel_control_api_input <- function(client_id, data, city, return_df) {
 
   }
 
-  if (length(client_id) > 1) {
+  if (length(client_id) != 1) {
 
     message <-
       glue::glue("`client_id` must be of length 1. You have input ",
@@ -34,7 +34,7 @@ bysykkel_control_api_input <- function(client_id, data, city, return_df) {
 
   }
 
-  if (length(data) > 1) {
+  if (length(data) != 1) {
 
     message <-
       glue::glue("`data` must be of length 1. You have input ",
@@ -78,7 +78,7 @@ bysykkel_control_api_input <- function(client_id, data, city, return_df) {
 
   }
 
-  if (length(city) > 1) {
+  if (length(city) != 1) {
 
     message <-
       glue::glue("`city` must be of length 1. You have input ",
@@ -101,7 +101,7 @@ bysykkel_control_api_input <- function(client_id, data, city, return_df) {
 
   }
 
-  if (length(return_df) > 1) {
+  if (length(return_df) != 1) {
 
     message <-
       glue::glue("`return_df` must be of length 1. You have input ",
