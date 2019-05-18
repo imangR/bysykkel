@@ -8,6 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/bysykkel)](https://cran.r-project.org/package=bysykkel)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/PersianCatsLikeToMeow/bysykkel/blob/master/LICENSE)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bysykkel)](http://cran.rstudio.com/package=bysykkel)
 <!-- badges: end -->
 
 ## Overview
@@ -182,12 +183,7 @@ bugs, please file a minimal reproducible example.
 
 ## Known issues
 
-  - There is an issue with `fread_trips_data()` in the current CRAN
-    release of bysykkel (i.e. version 0.1.1.0), which renders it unable
-    to read bike trips data directly to R. If you want to use
-    `fread_trips_data()`, then I recommend that you download the
-    development version of bysykkel from GitHub, where the issue is
-    resolved.
+No issues have been identified at this time in version 0.2.3.
 
 -----
 
