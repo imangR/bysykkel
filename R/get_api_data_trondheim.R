@@ -3,6 +3,9 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
   # Set base URL
   base_url <- "http://gbfs.urbansharing.com/trondheimbysykkel.no"
 
+  # Set user agent
+  bysykkel_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/bysykkel")
+
   # Availability ------------------------------------------------------------
 
   if (data == "availability") { # Get 'Availability'
@@ -10,7 +13,8 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
     endpoint <- "station_status.json"
 
     avail_get <- httr::GET(glue::glue("{base_url}/{endpoint}"),
-                           httr::add_headers("Client-Identifier" = client_id))
+                           httr::add_headers("Client-Identifier" = client_id),
+                           bysykkel_ua)
 
     avail_content <- httr::content(avail_get, "text", encoding = "UTF-8")
 
@@ -40,7 +44,8 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
 
     stations_get <-
       httr::GET(glue::glue("{base_url}/{endpoint}"),
-                httr::add_headers("Client-Identifier" = client_id))
+                httr::add_headers("Client-Identifier" = client_id),
+                bysykkel_ua)
 
     stations_content <- httr::content(stations_get, "text", encoding = "UTF-8")
 
@@ -62,7 +67,8 @@ get_api_data_trondheim <- function(client_id, data, return_df = FALSE) {
 
     system_get <-
       httr::GET(glue::glue("{base_url}/{endpoint}"),
-                httr::add_headers("Client-Identifier" = client_id))
+                httr::add_headers("Client-Identifier" = client_id),
+                bysykkel_ua)
 
     system_content <- httr::content(system_get, "text", encoding = "UTF-8")
 
