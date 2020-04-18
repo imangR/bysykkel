@@ -10,8 +10,8 @@ Description: Functions to get and download city bike data from
 Version: 0.3.1
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
-URL: http://github.com/PersianCatsLikeToMeow/bysykkel
-BugReports: http://github.com/PersianCatsLikeToMeow/bysykkel/issues
+URL: http://github.com/imangR/bysykkel
+BugReports: http://github.com/imangR/bysykkel/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
