@@ -9,8 +9,8 @@ testthat::skip_on_cran()
 
 # Create date variables that will be used to test package functions
 system_date  <- Sys.Date()
-system_year  <- lubridate::year(system.date)
-system_month <- lubridate::month(system.date)
+system_year  <- lubridate::year(system_date)
+system_month <- lubridate::month(system_date)
 
 # Create objects that will be used to test on downloaded city bike data
 oslo_df      <- fread_trips_data(year = system_year, month = system_month, city = "Oslo")
@@ -32,26 +32,26 @@ expected_col_names <-
 # Tests -------------------------------------------------------------------
 
 test_that("`fread_trips_data()` returns correct tibble class types", {
-  expect_equal(class(test_oslo),      c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(test_bergen),    c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(test_trondheim), c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(oslo_df),      c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(bergen_df),    c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(trondheim_df), c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("`fread_trips_data()` returns expected column names", {
-  expect_equal(names(test_oslo),      expected_col_names)
-  expect_equal(names(test_bergen),    expected_col_names)
-  expect_equal(names(test_trondheim), expected_col_names)
+  expect_equal(names(oslo_df),      expected_col_names)
+  expect_equal(names(bergen_df),    expected_col_names)
+  expect_equal(names(trondheim_df), expected_col_names)
 })
 
 test_that("`read_trips_data()` returns correct tibble class types", {
-  expect_equal(class(test_oslo_alt),      c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(test_bergen_alt),    c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(test_trondheim_alt), c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(oslo_df_alt),      c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(bergen_df_alt),    c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(trondheim_df_alt), c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("`fread_trips_data()` returns expected column names", {
-  expect_equal(names(test_oslo_alt),      expected_col_names)
-  expect_equal(names(test_bergen_alt),    expected_col_names)
-  expect_equal(names(test_trondheim_alt), expected_col_names)
+  expect_equal(names(oslo_df_alt),      expected_col_names)
+  expect_equal(names(bergen_df_alt),    expected_col_names)
+  expect_equal(names(trondheim_df_alt), expected_col_names)
 })
 

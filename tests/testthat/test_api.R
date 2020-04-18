@@ -5,7 +5,7 @@ testthat::skip_on_cran()
 
 # Last updated: 2020-04-18
 
-test_client_id <- "bysykkel.R.package-unit.test"
+test_client_id <- "bysykkel.Rpackage-unit.test"
 
 # Retrieve data from the API ----------------------------------------------
 
@@ -64,21 +64,21 @@ system_df_trondheim   <- get_api_data(test_client_id, data = "system",       cit
 # Test `get_api_data()` with `return_df = TRUE` ---------------------------
 
 test_that("`get_api_data()` runs successfully and returns a tibble for `city = 'Oslo'`", {
-  expect_equal(class(avail.df.oslo),    c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(stations.df.oslo), c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(system.df.oslo),   c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(avail_df_oslo),    c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(stations_df_oslo), c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(system_df_oslo),   c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("`get_api_data()` runs successfully and returns a tibble for `city = 'Bergen'`", {
-  expect_equal(class(avail.df.bergen),    c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(stations.df.bergen), c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(system.df.bergen),   c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(avail_df_bergen),    c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(stations_df_bergen), c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(system_df_bergen),   c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("`get_api_data()` runs successfully and returns a tibble for `city = 'Trondheim'`", {
-  expect_equal(class(avail.df.trondheim),    c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(stations.df.trondheim), c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(system.df.trondheim),   c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(avail_df_trondheim),    c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(stations_df_trondheim), c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(system_df_trondheim),   c("tbl_df", "tbl", "data.frame"))
 })
 
 # Test `get_api_data()` obvious errors ------------------------------------
