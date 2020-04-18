@@ -29,7 +29,6 @@ The data is read from:
 
 \itemize{
   \item \href{https://oslobysykkel.no/en/open-data/historical}{Oslo City Bike}
-  \item \href{https://oslovintersykkel.no/en/open-data/historical}{Oslo Winter Bike}
   \item \href{https://bergenbysykkel.no/en/open-data/historical}{Bergen City Bike}
   \item \href{https://trondheimbysykkel.no/en/open-data/historical}{Trondheim City Bike}
 }
