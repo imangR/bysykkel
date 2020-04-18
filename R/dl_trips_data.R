@@ -44,7 +44,6 @@
 #'
 #' dl_trips_data(year = 2019, month = 01, city = "Bergen", filetype = "JSON)
 #'
-#'
 #' # Download bike trips data for the month of October, 2018, in Trondheim
 #' dl_trips_data(2018, 10, "Trondheim")
 #'
