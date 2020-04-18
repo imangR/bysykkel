@@ -18,8 +18,7 @@ the \code{client_id}.}
 "availability", "stations", and "system".}
 
 \item{city}{A string. The city, or city bike service API, that you want to get data
-from. The options are "Oslo", "OsloW" (for winter bike data
-in Oslo), "Bergen", or "Trondheim".}
+from. The options are "Oslo", "Bergen", or "Trondheim".}
 
 \item{return_df}{Either \code{TRUE} or \code{FALSE}. Instructs the function on whether to
 return only a tibble (if set to \code{TRUE}).}
@@ -36,7 +35,6 @@ system from the API for
 
 \itemize{
   \item \href{https://oslobysykkel.no/en/open-data/realtime}{Oslo City Bike},
-  \item \href{https://oslovintersykkel.no/en/open-data/realtime}{Oslo Winter Bike},
   \item \href{https://bergenbysykkel.no/en/open-data/realtime}{Bergen City Bike}
   \item \href{https://trondheimbysykkel.no/en/open-data/realtime}{Trondheim City Bike}
 }
@@ -59,10 +57,10 @@ oslo_api_data <- get_api_data(client_id = "mycompany-myservice",
                               data      = "availability",
                               city      = "Oslo")
 
-# Get winter data on bike "availability", but return a tibble
+# Get data on bike "availability", but return a tibble
 oslo_winter_bike <- get_api_data(client_id = "myname-myapp",
                                  data      = "availability",
-                                 city      = "OsloW",
+                                 city      = "Oslo",
                                  return_df = TRUE)
 
 }

@@ -4,7 +4,7 @@
 \alias{dl_trips_data}
 \title{Download historical bike trips data in Norway}
 \usage{
-dl_trips_data(year, month, city)
+dl_trips_data(year, month, city, filetype = "CSV")
 }
 \arguments{
 \item{year}{A number. The year that you want to download data for.}
@@ -12,19 +12,17 @@ dl_trips_data(year, month, city)
 \item{month}{A number. The month that you want to download data for.}
 
 \item{city}{A string. The city that you want to download data for. The options are
-"Oslo", "OsloW", "Bergen", and "Trondheim".}
+"Oslo", "Bergen", and "Trondheim".}
+
+\item{filetype}{A string. The filetype that you want to download data for. The options are
+"CSV" (default) and "JSON".}
 }
 \value{
 The function downloads a CSV-file to your current working directory.
 }
 \description{
-\code{dl_trips_data} downloads a CSV-file of anonymized historical bike
+\code{dl_trips_data} downloads a file of anonymized historical bike
 trips data in Norway for the city of Oslo, Bergen, and Trondheim.
-
-To download bike trips data for winter bikes in Oslo, add a capital "W" at
-the end of the city name (i.e. "OsloW"). Trip records for winter
-bikes are currently only available for Oslo at the time of writing
-(2019-03-04).
 
 The data is provided according to the Norwegian License for Open Government
 Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
@@ -33,7 +31,6 @@ The data is downloaded from:
 
 \itemize{
   \item \href{https://oslobysykkel.no/en/open-data/historical}{Oslo City Bike}
-  \item \href{https://oslovintersykkel.no/en/open-data/historical}{Oslo Winter Bike}
   \item \href{https://bergenbysykkel.no/en/open-data/historical}{Bergen City Bike}
   \item \href{https://trondheimbysykkel.no/en/open-data/historical}{Trondheim City Bike}
 }
@@ -41,8 +38,11 @@ The data is downloaded from:
 \examples{
 \dontrun{
 
-# Download bike trips data for the month of January, 2019, in Bergen
-dl_trips_data(year = 2019, month = 01, city = "Bergen")
+# Download bike trip data for the month of January, 2019, in Bergen
+# as CSV or JSON
+dl_trips_data(year = 2019, month = 01, city = "Bergen", filetype = "CSV)
+
+dl_trips_data(year = 2019, month = 01, city = "Bergen", filetype = "JSON)
 
 # Download bike trips data for the month of October, 2018, in Trondheim
 dl_trips_data(2018, 10, "Trondheim")
