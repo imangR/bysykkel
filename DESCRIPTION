@@ -22,7 +22,7 @@ Imports:
     lubridate,
     magrittr,
     tibble
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Suggests:
     data.table,
     testthat (>= 2.1.0)
