@@ -6,7 +6,6 @@
 #'
 #' \itemize{
 #'   \item \href{https://oslobysykkel.no/en/open-data/realtime}{Oslo City Bike},
-#'   \item \href{https://oslovintersykkel.no/en/open-data/realtime}{Oslo Winter Bike},
 #'   \item \href{https://bergenbysykkel.no/en/open-data/realtime}{Bergen City Bike}
 #'   \item \href{https://trondheimbysykkel.no/en/open-data/realtime}{Trondheim City Bike}
 #' }
@@ -38,8 +37,7 @@
 #'
 #' @param city
 #' A string. The city, or city bike service API, that you want to get data
-#' from. The options are "Oslo", "OsloW" (for winter bike data
-#' in Oslo), "Bergen", or "Trondheim".
+#' from. The options are "Oslo", "Bergen", or "Trondheim".
 #'
 #' @param return_df
 #' Either \code{TRUE} or \code{FALSE}. Instructs the function on whether to
@@ -59,10 +57,10 @@
 #'                               data      = "availability",
 #'                               city      = "Oslo")
 #'
-#' # Get winter data on bike "availability", but return a tibble
+#' # Get data on bike "availability", but return a tibble
 #' oslo_winter_bike <- get_api_data(client_id = "myname-myapp",
 #'                                  data      = "availability",
-#'                                  city      = "OsloW",
+#'                                  city      = "Oslo",
 #'                                  return_df = TRUE)
 #'
 #'}
@@ -86,10 +84,9 @@ get_api_data <- function(client_id, data, city, return_df = FALSE) {
 
   switch(city,
     "Oslo" = get_api_data_oslo(client_id, data, return_df),
-    "OsloW" = get_api_data_oslow(client_id, data, return_df),
     "Bergen" = get_api_data_bergen(client_id, data, return_df),
     "Trondheim" = get_api_data_trondheim(client_id, data, return_df),
-    stop("Something went wrong.")
+    stop(paste0("\"", city, "\" is an invalid city name."))
   )
 
 }

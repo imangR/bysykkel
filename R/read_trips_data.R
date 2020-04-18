@@ -1,14 +1,8 @@
 #' @title Read historical bike trips data in Norway to R
 #'
 #' @description
-#' \code{read_trips_data} imports anonymized
-#' historical bike trips data in Norway for the city of Oslo, Bergen,
-#' and Trondheim directly to R.
-#'
-#' To read bike trips data for winter bikes in Oslo, add a capital "W" at
-#' the end of the city name (i.e. "OsloW"). Trip records for winter
-#' bikes are currently only available for Oslo at the time of writing
-#' (2019-03-04).
+#' \code{read_trips_data} imports anonymized historical bike trips data in
+#' Norway for the city of Oslo, Bergen, and Trondheim directly to R.
 #'
 #' The data is provided according to the Norwegian License for Open Government
 #' Data 2.0 \href{https://data.norge.no/nlod/en/2.0}{NLOD 2.0}.
@@ -59,7 +53,7 @@
 
 read_trips_data <- function(year, month, city) {
 
-# Control input arguments -------------------------------------------------
+  # Control input arguments -------------------------------------------------
 
   bysykkel_control_input(year, month, city)
 
@@ -69,14 +63,13 @@ read_trips_data <- function(year, month, city) {
                      "{lubridate::month(month, label = TRUE, abbr = FALSE)}, ",
                      "{year}."))
 
-# Control structure -------------------------------------------------------
+  # Control structure -------------------------------------------------------
 
   switch(city,
-    "Oslo" = read_trips_data_oslo(year, month),
-    "OsloW" = read_trips_data_oslow(year, month),
-    "Bergen" = read_trips_data_bergen(year, month),
-    "Trondheim" = read_trips_data_trondheim(year, month),
-    stop("Something went wrong.")
+         "Oslo" = read_trips_data_oslo(year, month),
+         "Bergen" = read_trips_data_bergen(year, month),
+         "Trondheim" = read_trips_data_trondheim(year, month),
+         stop(paste0("\"", city, "\" is an invalid city name."))
   )
 
 }
