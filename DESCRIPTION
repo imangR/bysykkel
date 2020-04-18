@@ -2,13 +2,12 @@ Package: bysykkel
 Type: Package
 Title: Get City Bike Data from Norway
 Description: Functions to get and download city bike data from 
-    the website and API service of each city bike service in Norway. These
-    functions minimize time spent on getting Norwegian city bike data, and
-    lower barriers to start analyzing the data. The data is retrieved from
-    Oslo City Bike, Oslo Winter Bike, Bergen City Bike, and Trondheim City 
-    Bike. The data is made available under 
-    NLOD 2.0 <https://data.norge.no/nlod/en/2.0>.
-Version: 0.2.3
+    the website and API service of each city bike service in Norway. The
+    package aims to reduce time spent on getting Norwegian city bike data,
+    and lower barriers to start analyzing it. The data is retrieved from
+    Oslo City Bike, Bergen City Bike, and Trondheim City Bike. The data is 
+    made available under NLOD 2.0 <https://data.norge.no/nlod/en/2.0>.
+Version: 0.3.1
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
 URL: http://github.com/PersianCatsLikeToMeow/bysykkel
@@ -25,4 +24,5 @@ Imports:
     tibble
 RoxygenNote: 6.1.1
 Suggests:
-    data.table
+    data.table,
+    testthat (>= 2.1.0)
