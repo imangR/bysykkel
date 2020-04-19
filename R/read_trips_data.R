@@ -26,7 +26,7 @@
 #'
 #' @param city
 #' A string. The city you want to download data from. The options are
-#' "Oslo", "OsloW", "Bergen", and "Trondheim".
+#' "Oslo", "Bergen", and "Trondheim".
 #'
 #' @return
 #' The function reads in bike trips data for the specified year, month, and city
