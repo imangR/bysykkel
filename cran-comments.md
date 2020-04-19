@@ -20,6 +20,8 @@ files downloaded from Trondheim Bysykkel
 
 * Added automated testing that runs locally
 
+* Removed `magrittr` as a package dependency since it is not used.
+
 ## Test environments
 * local Windows install, R 3.6.3
 * local OS X install, R 3.6.3

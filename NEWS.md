@@ -36,6 +36,10 @@ error.
 
 * Updated README.md
 
+## Minor Changes
+
+* Removed `magrittr` as a dependency since the package is not used.
+
 ## Minor changes
 
 ### fread_trips_data()
