@@ -12,7 +12,7 @@ fread_trips_data(year, month, city)
 \item{month}{A number. The month that you want to download data for.}
 
 \item{city}{A string. The city you want to download data from. The options are
-"Oslo", "OsloW", "Bergen", and "Trondheim".}
+"Oslo", "Bergen", and "Trondheim".}
 }
 \value{
 The function reads in bike trips data for the specified year, month, and city
