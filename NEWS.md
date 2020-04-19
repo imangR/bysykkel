@@ -1,3 +1,20 @@
+# bysykkel 0.3.1
+
+## General
+
+* The Oslo Winter Bike service has been shut down. Hence, the interface
+to this service has been removed from `fread_trips_data()`, `read_trips_data()`, and 
+`dl_trips_data()`.
+
+* Updated object documentation where the URL to the Oslo Winter Bike service 
+has been removed.
+
+* Automated testing has been added that will hopefully detect if there are any
+breaking changes to the services which the bysykkel functions rely on.
+
+* `fread_trips_data()`, `read_trips_data()`, and `dl_trips_data()` should output
+a more informative error message if the user provides an invalid city name.
+
 # bysykkel 0.2.3
 
 ## General
